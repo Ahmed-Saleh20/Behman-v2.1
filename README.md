@@ -2,5 +2,5 @@
 Behman Project Version 2.1
 
 ## Database
-Create Database Named behmandb in PhpMyAdmin.
-Import behmandb.sql file.
+- Create Database Named behmandb in PhpMyAdmin.
+- Import behmandb.sql file.
