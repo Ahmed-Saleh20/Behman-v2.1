@@ -1,0 +1,260 @@
+	
+	
+
+
+
+	/* Start SignIn Design */
+	body{
+		overflow-x: hidden;
+	}
+	.main-content {
+	  width: 50%;
+	  height: 40%;
+	  margin: 10px auto;
+	  background-color: #fff;
+	  border: 2px solid #e6e6e6;
+	  padding: 40px 50px;
+	}
+	.header {
+	  border: 0px solid #000;
+	  margin-bottom: 5px;
+	}
+	.well{
+		background-color: #187FAB;
+	}
+	#signin{
+		width: 60%;
+		border-radius: 30px;
+	}
+	.overlap-text {
+	  position: relative;
+	}
+
+	.overlap-text a {
+	  position: absolute;
+	  top: 8px;
+	  right: 10px;
+	  font-size: 14px;
+	  text-decoration: none;
+	  font-family: 'Overpass Mono', monospace;
+	  letter-spacing: -1px;
+	}	
+	/* End SignIn Design */
+	/* Start Forget Password */
+  body{
+    overflow-x: hidden;
+  }
+  .main-content {
+    width: 50%;
+    height: 40%;
+    margin: 10px auto;
+    background-color: #fff;
+    border: 2px solid #e6e6e6;
+    padding: 40px 50px;
+  }
+  .header {
+    border: 0px solid #000;
+    margin-bottom: 5px;
+  }
+  .well{
+    background-color: #187FAB;
+  }
+  #signup{
+    width: 60%;
+    border-radius: 30px;
+  }
+	
+	/* End Forgrt Password */  
+
+	/* Start Home Design */
+	body{
+    overflow-x: hidden;
+}
+#upload_image_button{
+    position: absolute;
+  	top: 50.5%;
+    right: 14%;
+    min-width: 100px;
+    max-width: 100px;
+  	border-radius: 4px;
+  	transform: translate(-50%, -50%);
+}
+label{
+    padding: 7px;
+    display: table;
+    color: #fff;
+}
+input[type="file"] {
+    display: none;
+}
+#content{
+    width: 70%;
+}
+#btn-post{ /* responsive button */
+    min-width: 25%;
+    max-width: 25%;
+}
+#insert_post{
+    background-color: #fff;
+    border: 2px solid #e6e6e6;
+    padding: 40px 50px;
+}
+#posts{
+    border: 5px solid #e6e6e6;
+    padding: 20px 20px;
+}
+#single_posts{
+    border: 5px solid #e6e6e6;
+    padding: 40px 50px;
+}
+.pb-cmnt-container {
+    font-family: Lato;
+    margin-top: 100px;
+}
+.pb-cmnt-textarea {
+    resize: none;
+    padding: 20px;
+    height: 110px;
+    width: 100%;
+    border: 1px solid #F2F2F2;
+}
+#find_people{
+    border: 5px solid #e6e6e6;
+    padding: 40px 50px;
+}
+#result_posts{
+    border: 5px solid #e6e6e6;
+    padding: 40px 50px;
+}
+form.search_form input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+	border-radius:4px;
+    border: 1px solid grey;
+    float: left;
+    width: 80%;
+    background: #f1f1f1;
+}
+
+form.search_form button {
+    float: left;
+    width: 20%;
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+}
+
+form.search_form button:hover {
+    background: #0b7dda;
+}
+
+form.search_form::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+	/* End Home Design */
+	/* Start Profile Design */
+#cover-img{
+	height:400px;
+   	width:100%;
+}
+#profile_img{
+	position: absolute;
+	top: 160px;
+	left: 40px;
+}
+#update_profile{
+  	position: absolute;
+  	top: 150px;
+  	cursor: pointer;
+  	left: 93px;
+  	border-radius: 4px;
+  	background-color: rgba(0,0,0,0.1);
+  	transform: translate(-50%, -50%);
+}
+#button_profile{
+  	position: absolute;
+  	top: 115%;
+  	left: 50%;
+  	cursor: pointer;
+  	transform: translate(-50%, -50%);
+}
+#own_posts{
+    border: 5px solid #e6e6e6;
+    padding: 40px 50px;
+}
+#posts_img {
+    height:300px;
+   	width:100%;
+}	
+/* End Profile Design */
+/* start user_profile */
+#own_posts{
+    border: 5px solid #e6e6e6;
+    padding: 40px 50px;
+	width:90%;
+}
+#posts_img {
+    height:300px;
+   	width:100%;
+}
+.btn_udown{
+ margin-left: 500px;
+}
+@media (min-width: 768px)
+.col-sm-6 {
+    width: 50%;
+    margin-left: 15px; !i
+}
+/* Start Index Design */
+	body{
+		overflow-x: hidden;
+	}
+	#centered1 {
+	    position: absolute;
+	    font-size:10vw;
+	    top: 20%;
+	    left: 10%;
+	    
+	}
+	#centered2 {
+	    position: absolute;
+	    font-size:10vw;
+	    top: 40%;
+	    left: 10%;
+	}
+	#centered3 {
+	    position: absolute;
+	    font-size:10vw;
+	    top: 60%;
+	    left: 10%;
+	}
+	#signup{
+		width: 60%;
+		border-radius: 30px;
+		margin-bottom: 15px;
+	}
+	#login{
+		width: 60%;
+		background-color: #fff;
+		border: 1px solid #1da1f2;
+		color: #1da1f2;
+		border-radius: 30px;
+	}
+	#login:hover{
+		width: 60%;
+		background-color: #fff;
+		color: #1da1f2;
+		border: 2px solid #1da1f2;
+		border-radius: 30px;
+	}
+	.well{
+		background-color: #187FAB;
+		color: white;
+		text-align: center;
+	}
+	/* End Index Design */
