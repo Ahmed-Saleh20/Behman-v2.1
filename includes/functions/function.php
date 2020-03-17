@@ -1,3 +1,4 @@
+
 <?php
  
 include 'connectDB.php';
@@ -86,6 +87,8 @@ function get_posts(){
 		$user_image = $row_user['user_image'];
 		$user_type = $row_user['type'];
 
+		$share_post = "post__id=";
+
 ?>
 		<!-- Start Display Posts -->
 		<div class='row'>
@@ -115,7 +118,26 @@ function get_posts(){
 					</div>
 					<div class='col-sm-4'> </div>
 				</div>
-				<a href='postDetails.php?post_id=<?php echo $post_id ?>' style='float:right;'><button class='btn btn-info'>Comment</button></a><br>
+				<a href='postDetails.php?post_id=<?php echo $post_id ?>' style='float:right;'><button class='btn btn-info'>Comment</button></a>
+				
+				<div class="share-area">
+				  <div id="popover-div" class="col-sm-12 col-xs-12 col-md-9">
+				    <buttom id="share" class="btn btn-info change-trigger" data-original-title="Share a link to this post">Share</buttom>        
+				    <div class="hide" id="html-div">
+				      <form class="share-form">
+				        <div class="form-group">
+				          <input class="form-control share-link" id="post_link" type="text" readonly=""  value="<?php echo $share_post.$post_id ?>"/>
+				        </div>
+				        <div class="form-group">
+				        <a onclick="myFunction()" id="copy" class="share-copy-button">Copy link</a>
+ 				        </div>
+				      </form>
+				    </div>
+				  </div>
+				</div>
+
+
+
 			</div>
 			<div class='col-sm-3'> </div>
 		</div><br>

@@ -4,7 +4,6 @@
 	<!--This File Include Head Part icludes CSS & Font-Awesome File-->
 		
 		
-<?php// getTitle()?>
 <!DOCTYPE html>
 <html>
 	<!-- Start Head -->

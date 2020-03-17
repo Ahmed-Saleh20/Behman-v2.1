@@ -15,7 +15,8 @@
 
     // Include The Important File
 	   	include $func .  'function.php';
-	    include $tpl  .  'header.php'; 
+	    include $tpl  .  'header.php';
+
 
 	//Include Navbar On All Pages Expect the One With $noNavbar Variable
 

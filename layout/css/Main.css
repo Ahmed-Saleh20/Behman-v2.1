@@ -257,4 +257,25 @@ form.search_form::after {
 		color: white;
 		text-align: center;
 	}
+	/* css for share button*/
+div .share-area{
+  float: right;
+  margin-left: 5px;
+}
+
+div .share-form{
+  width: 200px;
+  height: 50px;
+}
+div .share-copy-button{
+  background: none;
+  color: #0077cc;
+  border: none;
+  margin-top: -5px;
+  cursor: pointer;
+}
+div .share-link{
+  background: red;
+}
+
 	/* End Index Design */
