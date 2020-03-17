@@ -87,7 +87,7 @@ function get_posts(){
 		$user_image = $row_user['user_image'];
 		$user_type = $row_user['type'];
 
-		$share_post = "post__id=";
+		$share_post = "postDetails.php?post_id=";
 
 ?>
 		<!-- Start Display Posts -->
