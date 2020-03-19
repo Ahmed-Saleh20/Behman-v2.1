@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 12, 2020 at 02:54 AM
+-- Generation Time: Mar 19, 2020 at 02:01 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -54,7 +54,7 @@ CREATE TABLE `posts` (
   `post_id` int(11) NOT NULL,
   `post_content` varchar(500) NOT NULL,
   `post_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `postLike` int(11) NOT NULL,
+  `likes` int(11) NOT NULL,
   `postShare` int(11) NOT NULL,
   `postType` int(11) NOT NULL,
   `status` int(11) NOT NULL,
@@ -67,9 +67,28 @@ CREATE TABLE `posts` (
 -- Dumping data for table `posts`
 --
 
-INSERT INTO `posts` (`post_id`, `post_content`, `post_date`, `postLike`, `postShare`, `postType`, `status`, `AllowComment`, `cat_id`, `user_id`) VALUES
-(20, 'What is Depression ?', '2020-03-12 01:08:47', 0, 0, 0, 0, 0, 0, 9),
-(22, 'What is Depression ?', '2020-03-12 01:41:14', 0, 0, 0, 0, 0, 0, 10);
+INSERT INTO `posts` (`post_id`, `post_content`, `post_date`, `likes`, `postShare`, `postType`, `status`, `AllowComment`, `cat_id`, `user_id`) VALUES
+(20, 'What is Depression ?', '2020-03-19 12:33:18', 0, 0, 0, 0, 0, 0, 9),
+(22, 'What is Depression ?', '2020-03-19 12:21:59', 1, 0, 0, 0, 0, 0, 10);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rating_info`
+--
+
+CREATE TABLE `rating_info` (
+  `user_id` int(11) NOT NULL,
+  `post_id` int(11) NOT NULL,
+  `rating_action` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `rating_info`
+--
+
+INSERT INTO `rating_info` (`user_id`, `post_id`, `rating_action`) VALUES
+(8, 22, 'like');
 
 -- --------------------------------------------------------
 
@@ -146,6 +165,12 @@ ALTER TABLE `comments`
 --
 ALTER TABLE `posts`
   ADD PRIMARY KEY (`post_id`);
+
+--
+-- Indexes for table `rating_info`
+--
+ALTER TABLE `rating_info`
+  ADD UNIQUE KEY `UC_rating_info` (`user_id`,`post_id`);
 
 --
 -- Indexes for table `users`

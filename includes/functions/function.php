@@ -3,6 +3,7 @@
  
 include 'connectDB.php';
 
+
 function getTitle(){
 
 	global $pageTitle ;
@@ -16,136 +17,103 @@ function getTitle(){
 	}
 }
 
-/*
-** Home Redirect Function v2.0
-** This Function Accept Parameters
-** $theMsg = Echo The Message  [ Error | Success | Warning ]
-** $url = The Link You Want To Redirect To
-** $seconds = seconds Before Redirecting
-*/ 
+/* Start Like Functions */
 
-function redirectHome( $theMsg, $url= null, $seconds = 3 ){
+// if user clicks like or dislike button
+if (isset($_POST['action'])) {
 
-	if ($url === null){
+	$useremail = $_SESSION['user_email'];
+	$select_user = $con->prepare("SELECT * FROM users WHERE user_email= ?");
+	$select_user ->execute(array($useremail));
+	$row = $select_user ->fetch();			
+	$user_id = $row['user_id']; 
 
-		$url = 'index.php';
-		$link = 'Homepage';
 
-	}else{
+	$post_id = $_POST['post_id'];
+  	$action = $_POST['action'];
 
-		if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] !== ''){
+	  switch ($action) {
+	  	case 'like':
+	        $sql = $con->prepare("INSERT INTO 
+	                                    rating_info (user_id, post_id, rating_action) 
+	                                VALUES 
+	                                    ($user_id, $post_id, 'like') 
+	                                ON 
+	                                    DUPLICATE KEY 
+	                                UPDATE 
+	                                    rating_action='like'");
+	    break;
 
-			$url = $_SERVER['HTTP_REFERER'];
-			$link = 'Previous Page';
+	  	case 'unlike':
+	        $sql = $con->prepare("DELETE FROM 
+	                                    rating_info 
+	                                WHERE 
+	                                    user_id=$user_id 
+	                                AND 
+	                                    post_id=$post_id");
+		  break;
 
-		}else{
+	  	default:
+	  	break;
+	  }
 
-			$url = 'index.php';
-		 	$link = 'Homepage';
-
-		}
-	}
-	echo $theMsg ;
-	echo "<div class='alert alert-info'>You Will Be Redirected to $link After $seconds Seconds.</div>";
-	header("refresh:$seconds;url=$url");
-    exit(); 
+  // execute query to effect changes in the database ...
+  $sql ->execute();
+  echo getRating($post_id);
+  exit(0);
 }
 
-/*
-** Display Posts In Home v1.0
-** 
-**
-*/
-
-function get_posts(){
+// Get total number of likes for a particular post
+function getLikes($id)
+{
 	global $con;
-	$per_page=4;
-	if (isset($_GET['page'])) {
-	$page = $_GET['page'];
-	}
-	else {
-	$page=1;
-	}
-	$start_from = ($page-1) * $per_page;
+	$sql = $con->prepare("SELECT COUNT(*) FROM rating_info WHERE post_id = $id AND rating_action='like'");
+	$sql ->execute();
+	$result = $sql ->fetch();
+	$total = $result[0];
+	$sql2 = $con->prepare("UPDATE posts SET likes=$total WHERE post_id = $id");
+	$sql2 ->execute();
+	return $result[0];
 
-	$select_posts = $con->prepare("SELECT * FROM posts ORDER by 1 DESC LIMIT $start_from, $per_page");
-	$select_posts ->execute();
-	$posts = $select_posts ->fetchAll();
+} 
 
-	foreach ($posts as $key => $post){
-
-		$post_id   = $post['post_id'];
-		$user_id   = $post['user_id'];
-		$content   = $post['post_content'];
-		$post_date = $post['post_date'];
-
-		//getting the user who has posted the post
-		$select_user = $con->prepare("SELECT * FROM users WHERE user_id = ? AND posts='yes' ");
-		$select_user ->execute(array($user_id));
-		$row_user    = $select_user ->fetch();
-		$user_name  = $row_user['user_name'];
-		$user_image = $row_user['user_image'];
-		$user_type = $row_user['type'];
-
-		$share_post = "postDetails.php?post_id=";
-
-?>
-		<!-- Start Display Posts -->
-		<div class='row'>
-			<div class='col-sm-2'> </div>
-			<div id='posts' class='col-sm-8'>
-				<div class='row'>
-					<div class='col-sm-2'>
-						<p><img src='includes/images/users/<?php if(!empty($user_image)){ echo $user_image; }else{ echo 'default.png'; } ?>' class='img-circle' width='100px' height='100px'></p>
-					</div>
-					<div class='col-sm-6'>
-					<?php				
-						if($user_type == 1 ){
-				    	echo "<h3><a style='text-decoration: none;cursor: pointer;color: #3897f0;' href='doc_profile.php?u_id=$user_id'>$user_name</a></h3>";
-				    	}else{
-				    	echo "<h3><a style='text-decoration: none;cursor: pointer;color: #3897f0;' href='user_profile.php?u_id=$user_id'>$user_name</a></h3>";
-				    	}
-					?>	
-				  	<h4><small style='color:black;'>Updated a post on <strong><?php echo $post_date ?></strong></small></h4>
-					</div>
-					<div class='col-sm-4'> </div>
-				</div>
-				
-				<div class='row'>
-					<div class='col-sm-2'> </div>
-					<div class='col-sm-6'>
-						<h3><p><?php echo $content ?></p></h3>
-					</div>
-					<div class='col-sm-4'> </div>
-				</div>
-				<a href='postDetails.php?post_id=<?php echo $post_id ?>' style='float:right;'><button class='btn btn-info'>Comment</button></a>
-				
-				<div class="share-area">
-				  <div id="popover-div" class="col-sm-12 col-xs-12 col-md-9">
-				    <buttom id="share" class="btn btn-info change-trigger" data-original-title="Share a link to this post">Share</buttom>        
-				    <div class="hide" id="html-div">
-				      <form class="share-form">
-				        <div class="form-group">
-				          <input class="form-control share-link" id="post_link" type="text" readonly=""  value="<?php echo $share_post.$post_id ?>"/>
-				        </div>
-				        <div class="form-group">
-				        <a onclick="myFunction()" id="copy" class="share-copy-button">Copy link</a>
- 				        </div>
-				      </form>
-				    </div>
-				  </div>
-				</div>
-
-
-
-			</div>
-			<div class='col-sm-3'> </div>
-		</div><br>
-		<!-- End Display Posts -->
-   <?php
-	}
-	include("includes/functions/pagination.php");
+// Get total number of likes and dislikes for a particular post
+function getRating($id)
+{
+	global $con;
+	$rating = array();
+	$likes_query = $con->prepare("SELECT COUNT(*) FROM rating_info WHERE post_id = $id AND rating_action='like'");
+	$likes_query ->execute();
+	$likes = $likes_query ->fetch();
+	$rating = [
+	   'likes' => $likes[0],
+	];
+	return json_encode($rating);
 }
+
+// Check if user already likes post or not
+function userLiked($post_id)
+{
+  	global $con;
+  	
+  	$useremail = $_SESSION['user_email'];
+	$select_user = $con->prepare("SELECT * FROM users WHERE user_email= ?");
+	$select_user ->execute(array($useremail));
+	$row = $select_user ->fetch();			
+	$user_id = $row['user_id']; 
+
+  	$sql = $con->prepare("SELECT * FROM rating_info WHERE user_id=$user_id AND post_id=$post_id AND rating_action='like'");
+  	$sql ->execute();
+  	$count = $sql->rowCount();
+
+  	if ($count > 0) {
+  		return true;
+  	}else{
+  		return false;
+  	}
+}
+
+/* End Like Functions */
 
 /*
 ** Display Details of Post v1.0
