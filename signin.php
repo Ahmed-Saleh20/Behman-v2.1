@@ -53,12 +53,23 @@
 		$select_user ->execute(array($email, $pass));
 		$row = $select_user ->fetch();	
 		$count = $select_user->rowCount();
-		if ($count > 0) {
+        $approved = "SELECT approved FROM users WHERE user_email='$email'";
+		if ($count > 0 && $approved == 1) {
 			$_SESSION['user_email'] = $email; 
-			$_SESSION['login_ID'] = $row['user_id']; 
+			$_SESSION['login_ID'] = $row['user_id'];
+            $type = "SELECT type FROM users WHERE user_email='$email'";
+            if($type==1){
 			header('Location:home.php');
+            }
+            else{
+            header('Location:home.php');
+            }
 			exit(); 
 		}
+        else{
+            echo "<script>alert('Wrong Email / Password, try again!')</script>";
+			echo "<script>window.open('signin.php','_self')</script>";
+        }
 	}
 ?>		
 <?php

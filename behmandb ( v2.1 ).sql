@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 19, 2020 at 02:01 PM
+-- Generation Time: Mar 19, 2020 at 09:18 PM
 -- Server version: 10.4.8-MariaDB
--- PHP Version: 7.3.11
+-- PHP Version: 7.3.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -42,7 +42,8 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`com_id`, `post_id`, `user_id`, `comment`, `comment_author`, `date`) VALUES
-(6, 22, 10, 'Depression (major depressive disorder) is a common and serious medical illness that negatively affects how you feel, the way you think and how you act. Fortunately, it is also treatable. Depression causes feelings of sadness and/or a loss of interest in a', 'doctor samy_mohamed_883013', '2020-03-12 01:52:44');
+(6, 22, 10, 'Depression (major depressive disorder) is a common and serious medical illness that negatively affects how you feel, the way you think and how you act. Fortunately, it is also treatable. Depression causes feelings of sadness and/or a loss of interest in a', 'doctor samy_mohamed_883013', '2020-03-12 01:52:44'),
+(7, 20, 9, '2nt 3abet yad', 'doctor samy_mohamed_883013', '2020-03-19 18:42:50');
 
 -- --------------------------------------------------------
 
@@ -68,8 +69,8 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`post_id`, `post_content`, `post_date`, `likes`, `postShare`, `postType`, `status`, `AllowComment`, `cat_id`, `user_id`) VALUES
-(20, 'What is Depression ?', '2020-03-19 12:33:18', 0, 0, 0, 0, 0, 0, 9),
-(22, 'What is Depression ?', '2020-03-19 12:21:59', 1, 0, 0, 0, 0, 0, 10);
+(20, 'What is Depression ?', '2020-03-19 17:47:07', 1, 0, 0, 0, 0, 0, 9),
+(22, 'What is Depression ?', '2020-03-19 17:47:07', 2, 0, 0, 0, 0, 0, 10);
 
 -- --------------------------------------------------------
 
@@ -88,7 +89,9 @@ CREATE TABLE `rating_info` (
 --
 
 INSERT INTO `rating_info` (`user_id`, `post_id`, `rating_action`) VALUES
-(8, 22, 'like');
+(8, 22, 'like'),
+(11, 20, 'like'),
+(11, 22, 'like');
 
 -- --------------------------------------------------------
 
@@ -100,6 +103,8 @@ CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
   `f_name` text NOT NULL,
   `l_name` text NOT NULL,
+  `phone` text DEFAULT NULL,
+  `address` text DEFAULT NULL,
   `user_name` text NOT NULL,
   `describe_user` varchar(255) NOT NULL,
   `Relationship` text NOT NULL,
@@ -114,17 +119,21 @@ CREATE TABLE `users` (
   `status` text NOT NULL,
   `posts` text NOT NULL,
   `recovery_account` varchar(255) NOT NULL,
-  `type` int(11) NOT NULL
+  `type` int(11) NOT NULL,
+  `CV` varchar(255) DEFAULT NULL,
+  `approved` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `f_name`, `l_name`, `user_name`, `describe_user`, `Relationship`, `user_pass`, `user_email`, `user_country`, `user_gender`, `user_birthday`, `user_image`, `user_cover`, `user_reg_date`, `status`, `posts`, `recovery_account`, `type`) VALUES
-(8, 'Doctor Samy', 'Mohamed', 'doctor samy_mohamed_883013', 'Hello!! This is my default status', '........', '12345678', 'samy@gmail.com', 'Egypt', 'Male', '2019-11-28', 'default.png', 'default_cover.jpg', '2020-03-12 01:03:07', 'verified', 'no', 'ifyouaregootatsomethingdontdoitforfree45566677888', 1),
-(9, 'User Ahmed', 'Maher', 'user ahmed_maher_697819', 'Hello!! This is my default status', 'Single', '12345678', 'ahmed@gmail.com', 'Egypt', 'Male', '2018-10-27', 'head_red.png.22', 'default_cover.jpg', '2020-03-12 01:35:01', 'verified', 'yes', 'ifyouaregootatsomethingdontdoitforfree45566677888', 2),
-(10, 'User Mo ', 'Karam', 'user mo _karam_933005', 'Hello!! This is my default status', '........', '12345678', 'mo@gmail.com', 'Egypt', 'Male', '2017-11-25', 'head_sun_flower.png.89', 'default_cover.jpg', '2020-03-12 01:50:51', 'verified', 'yes', 'ifyouaregootatsomethingdontdoitforfree45566677888', 2);
+INSERT INTO `users` (`user_id`, `f_name`, `l_name`, `phone`, `address`, `user_name`, `describe_user`, `Relationship`, `user_pass`, `user_email`, `user_country`, `user_gender`, `user_birthday`, `user_image`, `user_cover`, `user_reg_date`, `status`, `posts`, `recovery_account`, `type`, `CV`, `approved`) VALUES
+(8, 'Doctor Samy', 'Mohamed', '', '', 'doctor samy_mohamed_883013', 'Hello!! This is my default status', '........', '12345678', 'samy@gmail.com', 'Egypt', 'Male', '2019-11-28', 'default.png', 'default_cover.jpg', '2020-03-19 19:27:51', 'verified', 'no', 'ifyouaregootatsomethingdontdoitforfree45566677888', 1, NULL, 1),
+(9, 'User Ahmed', 'Maher', '', '', 'user ahmed_maher_697819', 'Hello!! This is my default status', 'Single', '12345678', 'ahmed@gmail.com', 'Egypt', 'Male', '2018-10-27', 'head_red.png.22', 'default_cover.jpg', '2020-03-19 19:32:14', 'verified', 'yes', 'ifyouaregootatsomethingdontdoitforfree45566677888', 2, NULL, 1),
+(10, 'User Mo ', 'Karam', '', '', 'user mo _karam_933005', 'Hello!! This is my default status', '........', '12345678', 'mo@gmail.com', 'Egypt', 'Male', '2017-11-25', 'head_sun_flower.png.89', 'default_cover.jpg', '2020-03-19 19:32:24', 'verified', 'yes', 'ifyouaregootatsomethingdontdoitforfree45566677888', 2, NULL, 1),
+(12, 'adel', 'ahmed', NULL, NULL, 'adel_ahmed_825871', 'Hello!! This is my default status', '........', '12345678', 'adel@gmail.com', 'Egypt', 'Male', '18/5/2000', 'default.png', 'default_cover.jpg', '2020-03-19 19:54:11', 'verified', 'no', 'ifyouaregootatsomethingdontdoitforfree45566677888', 2, NULL, 1),
+(14, 'sameh', 'ashraf', '0105578959', 'dsadadadsasdas', 'sameh_ashraf_994599', 'Hello!! This is my default status', '........', '12345678', 'sameh@gmail.com', 'Egypt', 'Male', '16/7/1990', 'default.png', 'default_cover.jpg', '2020-03-19 20:08:15', 'verified', 'no', 'ifyouaregootatsomethingdontdoitforfree45566677888', 1, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -193,7 +202,7 @@ ALTER TABLE `user_messages`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `com_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `com_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `posts`
@@ -205,7 +214,7 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `user_messages`

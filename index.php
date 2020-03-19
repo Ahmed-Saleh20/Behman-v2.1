@@ -31,6 +31,7 @@
 			<h4><strong>Join To Behman Today.</strong></h4>
 				
 				<a href="signup.php" id="signup" class="btn btn-info btn-lg" class="button">SignUp</a>
+                <a href="docsignup.php" id="docsignup" class="btn btn-primary btn-lg" class="button">Join our doctors</a>
 				<a href="signin.php" id="login" class="btn btn-primary btn-lg" class="button">Login</a>
 
 		</div>

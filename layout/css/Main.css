@@ -61,6 +61,10 @@
     width: 60%;
     border-radius: 30px;
   }
+#docsignup{
+    width: 60%;
+    border-radius: 30px;
+  }
 	
 	/* End Forgrt Password */  
 
@@ -232,6 +236,11 @@ form.search_form::after {
 	    left: 10%;
 	}
 	#signup{
+		width: 60%;
+		border-radius: 30px;
+		margin-bottom: 15px;
+	}
+    #docsignup{
 		width: 60%;
 		border-radius: 30px;
 		margin-bottom: 15px;

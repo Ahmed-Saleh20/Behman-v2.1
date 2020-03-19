@@ -119,14 +119,16 @@
 
 		$stmt = $con->prepare("INSERT into 
 									users 
-									(f_name,l_name,user_name,describe_user,Relationship,user_pass,user_email,user_country,user_gender,user_birthday,user_image,user_cover,user_reg_date,status,posts,recovery_account,type)
+									(f_name,l_name,user_name,describe_user,Relationship,user_pass,user_email,user_country,user_gender,user_birthday,user_image,user_cover,user_reg_date,status,posts,recovery_account,type,approved)
 									values 
-									('$first_name','$last_name','$username','Hello!! This is my default status','........','$pass','$email','$country','$gender','$birthday','default.png','default_cover.jpg',NOW(),'$status','$posts','ifyouaregootatsomethingdontdoitforfree45566677888','2')");
+									('$first_name','$last_name','$username','Hello!! This is my default status','........','$pass','$email','$country','$gender','$birthday','default.png','default_cover.jpg',NOW(),'$status','$posts','ifyouaregootatsomethingdontdoitforfree45566677888','2','1')");
 		$stmt ->execute();
 
 		if($stmt){
 			echo "<script>alert('Congratulations $first_name, your account has been created successfully.')</script>";
 			echo "<script>window.open('home.php','_self')</script>";
+            $_SESSION['user_email'] = $email;
+            header('Location:home.php');
 		}else {
 			echo "<script>alert('Registration failed, try again!')</script>";
 			echo "<script>window.open('signup.php','_self')</script>";
