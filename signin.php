@@ -53,11 +53,12 @@
 		$select_user ->execute(array($email, $pass));
 		$row = $select_user ->fetch();	
 		$count = $select_user->rowCount();
-        $approved = "SELECT approved FROM users WHERE user_email='$email'";
+        $approved = $row['approved'];
+         $type = $row['type'];
 		if ($count > 0 && $approved == 1) {
 			$_SESSION['user_email'] = $email; 
 			$_SESSION['login_ID'] = $row['user_id'];
-            $type = "SELECT type FROM users WHERE user_email='$email'";
+           
             if($type==1){
 			header('Location:home.php');
             }

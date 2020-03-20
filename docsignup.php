@@ -106,8 +106,6 @@
 		$username = strtolower($first_name . "_" . $last_name . "_" . $newgid);
 		$status = "verified";
 		$posts = "no";
-		$newgid = sprintf('%05d', rand(0, 999999));
-		$username = strtolower($first_name . "_" . $last_name . "_" . $newgid);
 
 		$check_username_query = $con->prepare("SELECT user_name from users where user_email='$email'");
 		$check_username_query ->execute();
