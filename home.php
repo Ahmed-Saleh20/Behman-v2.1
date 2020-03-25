@@ -14,17 +14,37 @@ if(!isset($_SESSION['user_email'])){
 	<link rel="stylesheet" href="layout/css/font-awesome4.min.css" />
 </head>
 <div class="container">
+
+	<!-- Start Create Post -->
 	<div class="row">
-		<div id="insert_post" class="col-sm-12">
-			<center>
-		  	<form action="post.php?do=insert" method="post" id="f" enctype='multipart/form-data'>
-				<input type="hidden" name="userid" value="<?php echo $user_id?>"/>
-				<textarea class="form-control" id="content" rows="4" name="content" placeholder="What's in your Mind ?"></textarea><br/>
-				<button type="sbumit" id="btn-post" class="btn btn-success">Post</button>
+		<div class="col-sm-2"></div>
+		<div class="col-sm-8 insert-post">
+			<h4> Create Post :</h4>
+		  	<form action="post.php?do=insert" method="POST" enctype='multipart/form-data'>
+		  		<div class="row">
+					<input type="hidden" name="userid" value="<?php echo $user_id?>"/>
+					<div class="col-sm-10">
+						<textarea class="form-control" rows="4" name="content" placeholder="What's in your Mind ?"></textarea>
+					</div>
+					<!--Start Status Field-->
+					<div class="form-group col-sm-2 select-type"> 
+						<label class="control-label type-lable">To: </label>		
+						<select class="form-control" name="posttype">
+							<option value="0">...</option>		
+							<option value="1">puplic</option>
+							<option value="2">Only Doctor</option>
+							<option value="3">Private Doctor</option>				
+						</select>
+					</div>
+				<!--End Status Field-->
+				</div><br/>
+				<button type="sbumit" id="btn-post" class="btn">Post</button>
 			</form>
-			</center>
 		</div>
+		<div class="col-sm-2"></div>
 	</div>
+	<!-- End Create Post -->
+
 	<div class="row">
 		<div class="col-sm-12">
 			<center><h2><strong>News Feed</strong></h2><br></center>

@@ -17,11 +17,10 @@ if(!isset($_SESSION['user_email'])){
 
 		if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	
-			
 			$content 	  = htmlentities($_POST['content']);
-			$postlike     = 0;
+			$likes     = 0;
 			$postshare    = 0;
-			$posttype     = 0;
+			$posttype     = $_POST['posttype'];;
 			$status       = 0;
 			$AllowComment = 0;
 			$catid        = 0;
@@ -31,14 +30,14 @@ if(!isset($_SESSION['user_email'])){
 	        	echo "<script>alert('Please Use 450 or less than 450 words')</script>";
 	        	echo"<script>window.open('home.php','_self')</script>";
 		    }else{
-	            if(strlen($content) >= 1){
+	            if(strlen($content) >= 0){
 
 		            $stmt = $con->prepare("
-						INSERT INTO posts(post_content,post_date,postLike,postShare,postType,status,AllowComment,Cat_id,user_id)
+						INSERT INTO posts(post_content,post_date,likes,postShare,postType,status,AllowComment,Cat_id,user_id)
 						VALUES(:zpost,now(),:zlike,:zshare,:ztype,:zstatus,:zallowcom,:zcatid,:zuserid ) ") ;
 					$stmt->execute(array(
 						'zpost'    	=> $content,
-						'zlike'     => $postlike,
+						'zlike'     => $likes,
 						'zshare'    => $postshare,
 						'ztype'    	=> $posttype,
 						'zstatus'   => $status,
@@ -56,7 +55,6 @@ if(!isset($_SESSION['user_email'])){
 						echo"<script>window.open('home.php','_self')</script>";
 					}
 					exit();
-
 				}
 			} 
 		}	  
