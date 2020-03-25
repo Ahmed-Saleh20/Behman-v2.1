@@ -105,6 +105,11 @@
   }
 
   /* End Home Design */
+
+
+ 
+
+
   /* Start SignIn Design */
 	body{
 		overflow-x: hidden;
@@ -174,10 +179,7 @@
 
 
 	/* Start Profile Design */
-#cover-img{
-	height:400px;
-   	width:100%;
-}
+
 #profile_img{
 	position: absolute;
 	top: 160px;
@@ -208,6 +210,7 @@
    	width:100%;
 }	
 /* End Profile Design */
+
 /* start user_profile */
 #own_posts{
     border: 5px solid #e6e6e6;
@@ -226,6 +229,7 @@
     width: 50%;
     margin-left: 15px; !i
 }
+
 /* Start Index Design */
 	body{
 		overflow-x: hidden;
@@ -342,3 +346,70 @@
 }
 
 /* End Like */
+
+/* Start Doctor Profile */
+.cover-img{
+  height:400px;
+  width:100%;
+  border-radius: 7px;
+}
+.cover-ul {
+  position: absolute;
+  top: 10px;
+  left: 40px;
+}
+.photo-ul{
+  position: absolute; 
+  bottom: 3px;
+  left: 26px
+}
+.profile{
+  position: absolute;
+  top: 160px;
+  left: 40px;
+}
+.panel-body {
+    padding: 10px;
+}
+.information ul{
+  padding: 0;
+  margin: 0;
+}
+.information ul li {
+  padding: 7px 10px;
+}
+.information ul li:nth-child(odd){
+  background-color: #eee;
+}
+.information ul li span{
+  display: inline-block;
+  width: 120px;
+}
+.thumbnail .date {
+  text-align: right;
+  font-size: 13px;
+  color: #AAA;
+  font-weight: bold;
+}
+.information .btn{
+  margin-top: 10px;
+}
+
+
+
+#button_profile{
+    position: absolute;
+    top: 115%;
+    left: 50%;
+    cursor: pointer;
+    transform: translate(-50%, -50%);
+}
+#own_posts{
+    border: 5px solid #e6e6e6;
+    padding: 40px 50px;
+}
+#posts_img {
+    height:300px;
+    width:100%;
+} 
+/* End Doctor Profile */
