@@ -124,6 +124,53 @@ if(!isset($_SESSION['user_email'])){
 			echo "<script>alert('This ID Is Not  Exist')</script>";
 			echo "<script>window.open('home.php','_self')</script>";
 		}
+	}elseif($do == 'private'){
+			
+		if($_SERVER['REQUEST_METHOD'] == 'POST'){
+			$doc_id 	  = $_POST['doc_id'];
+			$content 	  = htmlentities($_POST['content']);
+			$likes     	  = 0;
+			$postshare    = 0;
+			$posttype     = 3;
+			$status       = 0;
+			$AllowComment = 0;
+			$catid        = 0;
+			$userid       = $user_id;
+
+	        if(strlen($content) > 500){
+	        	echo "<script>alert('Please Use 450 or less than 450 words')</script>";
+	        	echo"<script>window.open('home.php','_self')</script>";
+		    }else{
+	            if(strlen($content) >= 0){
+
+		            $stmt = $con->prepare("
+						INSERT INTO posts(post_content,post_date,likes,postShare,postType,privateTo,status,AllowComment,Cat_id,user_id)
+						VALUES(:zpost,now(),:zlike,:zshare,:ztype,:zprivateTo,:zstatus,:zallowcom,:zcatid,:zuserid ) ") ;
+					$stmt->execute(array(
+						'zpost'    	=> $content,
+						'zlike'     => $likes,
+						'zshare'    => $postshare,
+						'ztype'    	=> $posttype,
+						'zprivateTo'=> $doc_id,
+						'zstatus'   => $status,
+						'zallowcom' => $AllowComment,
+						'zcatid'    => $catid,
+						'zuserid'   => $userid					
+					));
+					if($stmt){
+						echo "<script>alert('Your Post Have Been Updated Successfully.')</script>";
+						echo"<script>window.open('home.php','_self')</script>";
+						$update = $con->prepare("UPDATE users SET posts = 'yes' WHERE user_id = ? ");
+						$update->execute(array($userid));
+					}else{
+						echo "<script>alert('There are Error !!')</script>";
+						echo"<script>window.open('home.php','_self')</script>";
+					}
+					exit();
+				}
+			} 
+		}	
+			echo "<script>alert('<?php echo $doc_id?>')</script>";
 	}
 }	
 ?>

@@ -104,7 +104,7 @@
           	</div>
 	    </div>
 	    <div class="col-sm-1"> </div>
-	</div>	    
+	</div><br/>	    
 	<?php 
 	    if(isset($_POST['submit'])){
 	        $user_cover = $_FILES['user_cover']['name'];
@@ -147,10 +147,10 @@
 	<!-- End Cover And Pic Profile Area -->
 
 	<!-- Start Doctor Information -->
-	<div class="information block">
+	<div class="information">
 		<div class="row">
 			<div class="col-sm-1"></div>
-			<div class="col-sm-10">
+			<div class="col-sm-8">
 				<div class="panel panel-default">
 					<div class="panel-heading"> Doctor Information </div>
 					<div class="panel-body">
@@ -175,14 +175,6 @@
 								<i class="fa fa-tags fa-fw"></i>
 								<span>g</span>:
 							</li>							
-							<li>
-								<i class="fa fa-user fa-fw"></i>
-								<span>Full Name</span>:
-							</li>
-							<li>
-								<i class="fa fa-calendar fa-fw"></i>
-								<span>Register Date</span>:
-							</li>
 						</ul>
 						<?php		
 							if($user_id == $userown_id){
@@ -192,10 +184,49 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-1"></div>
+			<div class="col-sm-3">
+				<?php
+					echo"<a href='#' class='btn btn-default multi-btn'/>Test</a>";
+					echo"<a href='#' class='btn btn-default multi-btn'/>Test</a>";
+					echo"<a href='#' class='btn btn-default multi-btn'/>Test</a>";
+					echo"<a href='private_post.php' class='btn btn-default multi-btn'/>Private Questions</a>";			
+					// if($user_id != $userown_id){
+						echo"<a href='#' class='btn btn-default multi-btn' data-toggle='modal' data-target='#exampleModal' data-whatever='@mdo'/>Ask Private</a>";
+					// }
+				?>
+			</div>
 		</div>
 	</div>
-	<!-- End Doctor Information -->	
+	<!-- End Doctor Information -->
+
+	<!-- Start Private Post Popup -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	      	<h4 class="modal-title" id="exampleModalLabel" style="display:inline-block">Ask Your Question</h4>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <form action="post.php?do=private" method="POST">
+	        	<input type="hidden" name="doc_id" value="<?php echo $id ?>"/>
+	          <div class="form-group">
+	            <label for="message-text" class="col-form-label">Message:</label>
+	            <textarea class="form-control" id="message-text" name="content"rows="4"></textarea>
+	          </div>
+	      </div>
+	      <div class="modal-footer">
+	      	<input type="submit" value="Send message" name="message" class="btn btn-primary"/>
+	      	</form>
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<!-- End Private Post Popup -->
 
 
 

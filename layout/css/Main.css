@@ -365,12 +365,13 @@
 }
 .profile{
   position: absolute;
-  top: 160px;
+  top: 190px;
   left: 40px;
 }
 .panel-body {
     padding: 10px;
 }
+
 .information ul{
   padding: 0;
   margin: 0;
@@ -394,7 +395,10 @@
 .information .btn{
   margin-top: 10px;
 }
-
+.multi-btn{
+  margin-left: -10px;
+  width: 170px;
+}
 
 
 #button_profile{
