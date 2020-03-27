@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 19, 2020 at 09:18 PM
+-- Generation Time: Mar 27, 2020 at 06:33 PM
 -- Server version: 10.4.8-MariaDB
--- PHP Version: 7.3.10
+-- PHP Version: 7.3.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -58,6 +58,7 @@ CREATE TABLE `posts` (
   `likes` int(11) NOT NULL,
   `postShare` int(11) NOT NULL,
   `postType` int(11) NOT NULL,
+  `privateTo` int(11) DEFAULT NULL,
   `status` int(11) NOT NULL,
   `AllowComment` int(11) NOT NULL,
   `cat_id` int(11) NOT NULL,
@@ -68,9 +69,12 @@ CREATE TABLE `posts` (
 -- Dumping data for table `posts`
 --
 
-INSERT INTO `posts` (`post_id`, `post_content`, `post_date`, `likes`, `postShare`, `postType`, `status`, `AllowComment`, `cat_id`, `user_id`) VALUES
-(20, 'What is Depression ?', '2020-03-19 17:47:07', 1, 0, 0, 0, 0, 0, 9),
-(22, 'What is Depression ?', '2020-03-19 17:47:07', 2, 0, 0, 0, 0, 0, 10);
+INSERT INTO `posts` (`post_id`, `post_content`, `post_date`, `likes`, `postShare`, `postType`, `privateTo`, `status`, `AllowComment`, `cat_id`, `user_id`) VALUES
+(20, 'What is Depression ?', '2020-03-21 17:32:25', 1, 0, 0, NULL, 0, 0, 0, 9),
+(22, 'What is Depression ?', '2020-03-21 17:30:33', 3, 0, 0, NULL, 0, 0, 0, 10),
+(25, 'Hello test post type!', '2020-03-25 19:54:31', 0, 0, 1, NULL, 0, 0, 0, 9),
+(27, 'aaaaaaaaaaaaa', '2020-03-26 04:41:58', 0, 0, 0, NULL, 0, 0, 0, 8),
+(28, 'ahmed', '2020-03-26 05:48:46', 0, 0, 3, 8, 0, 0, 0, 9);
 
 -- --------------------------------------------------------
 
@@ -90,7 +94,8 @@ CREATE TABLE `rating_info` (
 
 INSERT INTO `rating_info` (`user_id`, `post_id`, `rating_action`) VALUES
 (8, 22, 'like'),
-(11, 20, 'like'),
+(9, 20, 'like'),
+(9, 22, 'like'),
 (11, 22, 'like');
 
 -- --------------------------------------------------------
@@ -129,7 +134,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `f_name`, `l_name`, `phone`, `address`, `user_name`, `describe_user`, `Relationship`, `user_pass`, `user_email`, `user_country`, `user_gender`, `user_birthday`, `user_image`, `user_cover`, `user_reg_date`, `status`, `posts`, `recovery_account`, `type`, `CV`, `approved`) VALUES
-(8, 'Doctor Samy', 'Mohamed', '', '', 'doctor samy_mohamed_883013', 'Hello!! This is my default status', '........', '12345678', 'samy@gmail.com', 'Egypt', 'Male', '2019-11-28', 'default.png', 'default_cover.jpg', '2020-03-19 19:27:51', 'verified', 'no', 'ifyouaregootatsomethingdontdoitforfree45566677888', 1, NULL, 1),
+(8, 'Doctor Samy', 'Mohamed', '', '', 'doctor samy_mohamed_883013', 'Hello!! This is my default status', '........', '12345678', 'samy@gmail.com', 'Egypt', 'Male', '2019-11-28', '0zlg5gqv_400x400.jpg.58', 'ali.jpg.78', '2020-03-25 22:29:54', 'verified', 'yes', 'ifyouaregootatsomethingdontdoitforfree45566677888', 1, NULL, 1),
 (9, 'User Ahmed', 'Maher', '', '', 'user ahmed_maher_697819', 'Hello!! This is my default status', 'Single', '12345678', 'ahmed@gmail.com', 'Egypt', 'Male', '2018-10-27', 'head_red.png.22', 'default_cover.jpg', '2020-03-19 19:32:14', 'verified', 'yes', 'ifyouaregootatsomethingdontdoitforfree45566677888', 2, NULL, 1),
 (10, 'User Mo ', 'Karam', '', '', 'user mo _karam_933005', 'Hello!! This is my default status', '........', '12345678', 'mo@gmail.com', 'Egypt', 'Male', '2017-11-25', 'head_sun_flower.png.89', 'default_cover.jpg', '2020-03-19 19:32:24', 'verified', 'yes', 'ifyouaregootatsomethingdontdoitforfree45566677888', 2, NULL, 1),
 (12, 'adel', 'ahmed', NULL, NULL, 'adel_ahmed_825871', 'Hello!! This is my default status', '........', '12345678', 'adel@gmail.com', 'Egypt', 'Male', '18/5/2000', 'default.png', 'default_cover.jpg', '2020-03-19 19:54:11', 'verified', 'no', 'ifyouaregootatsomethingdontdoitforfree45566677888', 2, NULL, 1),
@@ -208,7 +213,7 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `users`

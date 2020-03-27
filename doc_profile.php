@@ -190,9 +190,9 @@
 					echo"<a href='#' class='btn btn-default multi-btn'/>Test</a>";
 					echo"<a href='#' class='btn btn-default multi-btn'/>Test</a>";
 					echo"<a href='private_post.php' class='btn btn-default multi-btn'/>Private Questions</a>";			
-					// if($user_id != $userown_id){
+					if($user_id != $userown_id){
 						echo"<a href='#' class='btn btn-default multi-btn' data-toggle='modal' data-target='#exampleModal' data-whatever='@mdo'/>Ask Private</a>";
-					// }
+					}
 				?>
 			</div>
 		</div>
