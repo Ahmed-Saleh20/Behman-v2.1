@@ -135,7 +135,7 @@ if(!isset($_SESSION['user_email'])){
 			$status       = 0;
 			$AllowComment = 0;
 			$catid        = 0;
-			$userid       = $user_id;
+			$userid       = $sessionuser_id;
 
 	        if(strlen($content) > 500){
 	        	echo "<script>alert('Please Use 450 or less than 450 words')</script>";

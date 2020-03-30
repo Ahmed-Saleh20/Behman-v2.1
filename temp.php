@@ -34,3 +34,8 @@
 <?php
 	include 'includes/templates/footer.php';
 ?>
+.btn-info:hover {
+    color: #fff;
+    background-color: #31b0d5;
+    border-color: #269abc;
+}

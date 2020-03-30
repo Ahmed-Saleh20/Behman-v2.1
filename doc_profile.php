@@ -151,7 +151,7 @@
 		<div class="row">
 			<div class="col-sm-1"></div>
 			<div class="col-sm-8">
-				<div class="panel panel-default">
+				<div class="panel panel-info">
 					<div class="panel-heading"> Doctor Information </div>
 					<div class="panel-body">
 						<ul class="list-unstyled">
@@ -186,12 +186,13 @@
 			</div>
 			<div class="col-sm-3">
 				<?php
+					echo"<a href='#' class='btn btn-info multi-btn'/>Test</a>";
 					echo"<a href='#' class='btn btn-default multi-btn'/>Test</a>";
-					echo"<a href='#' class='btn btn-default multi-btn'/>Test</a>";
-					echo"<a href='#' class='btn btn-default multi-btn'/>Test</a>";
-					echo"<a href='private_post.php' class='btn btn-default multi-btn'/>Private Questions</a>";			
+					echo"<a href='#' class='btn btn-info multi-btn'/>Test</a>";		
 					if($user_id != $userown_id){
-						echo"<a href='#' class='btn btn-default multi-btn' data-toggle='modal' data-target='#exampleModal' data-whatever='@mdo'/>Ask Private</a>";
+						echo"<a href='#' class='btn btn-info multi-btn' data-toggle='modal' data-target='#exampleModal' data-whatever='@mdo'/>Ask Private</a>";
+					}else{
+						echo"<a href='private_post.php' class='btn btn-default multi-btn'/>Private Questions</a>";	
 					}
 				?>
 			</div>
@@ -218,7 +219,7 @@
 	          </div>
 	      </div>
 	      <div class="modal-footer">
-	      	<input type="submit" value="Send message" name="message" class="btn btn-primary"/>
+	      	<input type="submit" value="Send message" name="message" class="btn btn-info"/>
 	      	</form>
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 	      </div>

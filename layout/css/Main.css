@@ -1,11 +1,21 @@
-
+@media(max-width:576px){}
+@media(min-width:768px){}
+@media(min-width:992px){}
+@media(min-width:1200px){}
 
   /* S General */
   
   body{
     overflow-x: hidden;
   }
-
+  .panel-info {
+    border-color: #31b0d5;
+  }
+  .panel-info > .panel-heading {
+    color:black;
+    background-color: #31b0d5;
+    border-color: #31b0d5;
+  }
   /* E General */
 
   /* Start NavBar Design */
@@ -40,72 +50,6 @@
   }
   /* End NavBar Design */
   
-  /* Start Home Design */
-      /* Start Create Post */ /* If You Want Change Ask Me First. Don't Touch Please 'Saleh' */
-      .insert-post{
-        background-color: #fff;
-        border: 2px solid #e6e6e6;
-        padding: 10px 30px 20px 30px;
-      }
-      .insert-post textarea{}  /* Doesn't Delete It 'Saleh' */ 
-      .select-type{
-        padding: 10px 5px;
-        margin: 0px;
-      }
-      .type-lable{
-        font-weight: bold;
-        font-size: 16px
-      }
-      .insert-post button{
-        width: 100%;
-        color: #fff;
-        background-color:#269abc;
-      }
-      .insert-post button:hover {
-        color: #fff;
-        background-color: #eee;
-        border-color: #269abc;
-      }
-      @media (min-width: 480px){
-        .select-type {
-          padding:10px 10px;
-        }
-      }
-      /* End Create Post */
-
-  #posts{
-    border: 5px solid #e6e6e6;
-    padding: 20px 20px;
-  }
-
-  #single_posts{
-    border: 5px solid #e6e6e6;
-    padding: 40px 50px;
-  }
-
-  .pb-cmnt-container {
-    font-family: Lato;
-    margin-top: 100px;
-  }
-
-  .pb-cmnt-textarea {
-    resize: none;
-    padding: 20px;
-    height: 110px;
-    width: 100%;
-    border: 1px solid #F2F2F2;
-  }
-  #find_people{
-    border: 5px solid #e6e6e6;
-    padding: 40px 50px;
-  }
-  #result_posts{
-    border: 5px solid #e6e6e6;
-    padding: 40px 50px;
-  }
-
-  /* End Home Design */
-
 
  
 
@@ -282,26 +226,7 @@
 		color: white;
 		text-align: center;
 	}
-	/* css for share button*/
-    div .share-area{
-      float: right;
-      margin-left: 5px;
-    }
 
-    div .share-form{
-      width: 200px;
-      height: 50px;
-    }
-    div .share-copy-button{
-      background: none;
-      color: #0077cc;
-      border: none;
-      margin-top: -5px;
-      cursor: pointer;
-    }
-    div .share-link{
-      background: red;
-    }
 
 	/* End Index Design */
   /*Start Pagination Area*/
@@ -317,35 +242,7 @@
 
 /*End Pagination Area */
   
-/* Start Like */ 
-.like-btn{
-    color: #31b0d5;
-    cursor: pointer;
-    position: relative;
-    left: 20px;
-    top: 5px;
-}
-.post-info .fa{
-    font-size: 30px;
-}
-.likes{
-    background-color: #eee;
-    position: relative;
-    left: 23px;
-    min-width: 10px;
-    padding: 4px 9px;
-    font-size: 12px;
-    font-weight: 700;
-    line-height: 1;
-    color: #fff;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    background-color: #31b0d5;
-    border-radius: 10px;
-}
 
-/* End Like */
 
 /* Start Doctor Profile */
 .cover-img{
@@ -417,3 +314,259 @@
     width:100%;
 } 
 /* End Doctor Profile */
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+==============================
+========= START Home =========
+==============================
+*/
+
+/* Start Home Design */
+    /* Start Create Post */ /* If You Want Change Ask Me First. Don't Touch Please 'Saleh' */
+    .insert-post{
+      background-color: #fff;
+      border: 2px solid #e6e6e6;
+      padding: 10px 30px 20px 30px;
+    }
+    .insert-post textarea{}  /* Doesn't Delete It 'Saleh' */ 
+    .select-type{
+      padding: 10px 5px;
+      margin: 0px;
+    }
+    .type-lable{
+      font-weight: bold;
+      font-size: 16px
+    }
+    .insert-post button{
+      width: 100%;
+    }
+    @media (min-width: 480px){
+      .select-type {
+        padding:10px 10px;
+      }
+    }
+    /* End Create Post */
+
+    /*
+    ==============================
+    ============= POST ===========
+    ==============================
+    */
+
+/* End Home Design */ 
+
+/*
+==============================
+=========== End Home =========
+==============================
+*/
+
+
+/*
+==============================
+== Start post Details Page ===
+==============================
+*/
+    /*
+    ==============================
+    ============= POST ===========
+    ==============================
+    */
+
+    .Displayed-comment {
+      padding: 0px 50px;
+    }
+    .Displayed-comment h4 {
+      
+    }    
+    .Displayed-comment .comment{
+      padding: 10px;
+      background-color: #eee;
+      border-radius:8px;
+      font-size: 18px;
+      color: #31b0d5;
+    }
+    .send-panel{
+      border:2px solid #e6e6e6;
+    }
+    .send-btn{
+      position: relative;
+      top: 10px;
+    }
+/*
+==============================
+=== End post Details Page ====
+==============================
+*/
+
+
+
+/*
+==============================
+========= START POST =========
+==============================
+*/
+
+  /* Start Display Post */
+
+  .post{
+    border: 5px solid #e6e6e6;
+    padding: 20px 20px;
+  }
+
+    /*Start Post's USer Info*/
+    .user{  }
+    .post img{
+      width: 90px;
+      height:90px;
+      border-radius: 50%;
+      display: inline;
+      margin-right: 15px;
+    }
+    .post .user .name{
+      text-decoration: none;
+      cursor: pointer;
+      color: #31b0d5/*3897f0*/;
+      font-size: 29px;
+    }
+    .post .date{
+      position: relative;
+      top: -33px;
+      left:115px;
+      font-size: 13px;
+    }
+    /*End Post's USer Info*/
+  
+    /* Start Owner Action Buttons*/
+    .owner-action{
+        float: right;
+    }
+    .owner-action a{
+      color:#31b0d5;
+    }
+    .owner-action .edit,.delete{
+      font-size: 22px;
+      position: relative;
+      top: 22px;
+      left: 20px;
+      background-color: #eee;
+      padding:5px;
+      border-radius: 8px;
+    }
+    .owner-action a:hover{
+      color:#31b0d5;
+    }
+    @media(max-width:576px){
+      
+      .owner-action{
+        float: right;
+      }
+      .owner-action .edit,.delete{
+        font-size: 22px;
+        position: relative;
+        top:-5px;
+        right: 20px;
+      }
+      .owner-action .delete{
+        margin-right: 20px;
+      }
+
+    }
+    @media(max-width:768px){
+
+      .owner-action{
+        float: right;
+      }
+      .owner-action .edit,.delete{
+        font-size: 22px;
+        position: relative;
+        top:-5px;
+        right: 20px;
+      }
+      .owner-action .delete{
+        margin-right: 20px;
+      }
+
+    }
+    /* End Owner Action Buttons */
+    
+    /* Start Post Content */
+    .post .content{
+      font-size: 20px;
+      border: 2px solid #eee;
+      height:auto;
+    }
+    .content p{
+     margin: 0;
+     padding:6px 0px;
+     word-break: justify;
+    }
+    .post-button{
+      margin-top: 20px;
+    }
+    /* End Post Content */
+
+    /* Start Like Button */
+    .like-btn{
+        color: #31b0d5;
+        cursor: pointer;
+        position: relative;
+        left: 20px;
+        
+    }
+    .post-button .fa{
+        font-size: 34px;
+    }
+    .numLikes{
+        color: #fff;
+        background-color: #eee;
+        position: relative;
+        left: 23px;
+        min-width: 10px;
+        padding: 4px 9px;
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 1;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        background-color: #31b0d5;
+        border-radius: 10px;
+        bottom: 4px;
+    }
+    /* End Like Button */
+
+    /* Start Share And Show button */
+    .post-button .show-btn,.share-area{
+        float:right;
+    }
+    .share-form{
+        width: 200px;
+        height: 50px;
+    }
+    .share-copy-button{
+        position: relative;
+        bottom: 9px;
+        padding: 4px 10px;
+    }
+    /* Start Share And Show button */
+
+  /* End Display Post */
+
+
+/*
+==============================
+=========== End POST =========
+==============================
+*/

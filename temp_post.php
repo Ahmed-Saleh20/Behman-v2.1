@@ -1,53 +1,38 @@
 <?php
+
 session_start();
-$pageTitle = "private posts" ;
-$noNavbar = ''; 
+$pageTitle = "Home" ;
 include("initialize.php");
 
-if(!isset($_SESSION['user_email'])){
-	header("location:index.php");
-}else{ 
 
 ?>
 
-<div class="container">
-	<div class="row">
-		<div class="col-sm-12">
-		<center><h2><strong>Private Quetions</strong></h2><br></center>
-		
-		<?php
-		/* Get User ID */
-		$user = $_SESSION['user_email'];
-		$get_user  = $con->prepare("SELECT * from users where user_email='$user'");
-		$get_user  ->execute();
-		$row = $get_user  ->fetch();	
-		$userown_id = $row['user_id'];
-		$user_name = $row['user_name'];
-				
-		$get_posts = $con->prepare("SELECT * From posts WHERE postType = 3 AND PrivateTo = $userown_id");
-		$get_posts ->execute();
-		$posts = $get_posts ->fetchAll();
-		$count = $get_posts ->rowCount();	
+<center><h2><strong>News Feed</strong></h2><br></center>
 
-		foreach ($posts as $post){
+<!-- Start Display Posts -->
+<?php
 
-			$post_id   = $post['post_id'];
-			$user_id   = $post['user_id'];
-			$content   = $post['post_content'];
-			$post_date = $post['post_date'];
+	$select_posts = $con->prepare("SELECT * FROM posts ORDER BY post_id Desc ");
+	$select_posts ->execute();
+	$posts = $select_posts ->fetchAll();
 
-			//getting the user who has posted the post
-			$select_user = $con->prepare("SELECT * FROM users WHERE user_id = ? AND posts='yes' ");
-			$select_user ->execute(array($user_id));
-			$row_user    = $select_user ->fetch();
-			$user_name  = $row_user['user_name'];
-			$user_image = $row_user['user_image'];
-			$user_type = $row_user['type'];
+	foreach ($posts as $key => $post){
 
-			$share_post = "postDetails.php?post_id=";
+		$post_id   = $post['post_id'];
+		$user_id   = $post['user_id'];
+		$content   = $post['post_content'];
+		$post_date = $post['post_date'];
 
-		?>
+		//getting the user who has posted the post
+		$select_user = $con->prepare("SELECT * FROM users WHERE user_id = ? AND posts='yes' ");
+		$select_user ->execute(array($user_id));
+		$row_user    = $select_user ->fetch();
+		$user_name  = $row_user['user_name'];
+		$user_image = $row_user['user_image'];
+		$user_type = $row_user['type'];
 
+		$share_post = "postDetails.php?post_id=";
+	?>
 		<!-- Start Post Body -->
 		<div class='row'>
 			<div class='col-sm-2'> </div>
@@ -120,13 +105,8 @@ if(!isset($_SESSION['user_email'])){
 			<div class='col-sm-2'> </div>
 		</div><br>
 		<!-- End Post Body -->
-   <?php } ?>
-		</div>
-	</div>
-</div>
-
-<?php } ?>
-
+	<?php } ?>
+<!-- End Display Posts -->
 <?php
 	include 'includes/templates/footer.php';
 ?>

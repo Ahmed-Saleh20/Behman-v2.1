@@ -16,39 +16,28 @@ include 'connectDB.php';
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      <ul class="nav navbar-nav">
 		      	
-		      	<?php 
+		    <?php 
 				$useremail = $_SESSION['user_email'];
 
-				$select_user = $con->prepare("SELECT * FROM users WHERE user_email= ?");
+				$select_user = $con->prepare("SELECT * FROM users WHERE user_email = ?");
 				$select_user ->execute(array($useremail));
 				$row = $select_user ->fetch();	
 						
-				$user_id = $row['user_id']; 
+				$sessionuser_id = $row['user_id']; 
 				$user_name = $row['user_name'];
 				$first_name = $row['f_name'];
 				$last_name = $row['l_name'];
-				$describe_user = $row['describe_user'];
-				$Relationship_status = $row['Relationship'];
-				$user_pass = $row['user_pass'];
-				$user_email = $row['user_email'];
-				$user_country = $row['user_country'];
-				$user_gender = $row['user_gender'];
-				$user_birthday = $row['user_birthday'];
-				$user_image = $row['user_image'];
-				$user_cover = $row['user_cover'];
-				$recovery_account = $row['recovery_account'];
-				$register_date = $row['user_reg_date'];
 				$user_type = $row['type'];
 
 			    $user_posts = $con->prepare("SELECT * FROM posts WHERE user_id= ?");
-				$user_posts ->execute(array($user_id));
+				$user_posts ->execute(array($sessionuser_id));
 				$posts = $user_posts ->fetch();
 				$count = $user_posts ->rowCount();
 
 		    	if($user_type == 1 ){
-		    		echo "<li><a href='doc_profile.php?u_id=$user_id'> $first_name </a></li>";
+		    		echo "<li><a href='doc_profile.php?u_id=$sessionuser_id'> $first_name </a></li>";
 		    	}else{
-		    		echo "<li><a href='user_profile.php?u_id=$user_id'>$first_name</a></li>";
+		    		echo "<li><a href='user_profile.php?u_id=$sessionuser_id'>$first_name</a></li>";
 		    	}
 		        
 			?>
@@ -59,10 +48,10 @@ include 'connectDB.php';
 		          <a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'><span><i class='glyphicon glyphicon-chevron-down'></i></span></a>
 		          <ul class='dropdown-menu'>
 		            <li>
-		           <a href='my_post.php?u_id=$user_id'>My Posts <span class='badge badge-secondary'> $count</span></a>
+		           <a href='my_post.php?u_id=$sessionuser_id'>My Posts <span class='badge badge-secondary'> $count</span></a>
 		            </li>
 		            <li>
-		            <a href='edit_profile.php?u_id=$user_id'>Edit My Account</a>
+		            <a href='edit_profile.php?u_id=$sessionuser_id'>Edit My Account</a>
 		            </li>
 		            <li role='separator' class='divider'></li>
 		            <li>
