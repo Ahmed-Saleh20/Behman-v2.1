@@ -42,6 +42,7 @@ include 'connectDB.php';
 		        
 			?>
 				<li><a href="members.php">Find People</a></li>
+				 <li><a href="../chat/">chat room</a></li>
 			<?php	
 				echo"		
 		        <li class='dropdown'>
