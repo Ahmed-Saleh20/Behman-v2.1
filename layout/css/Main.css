@@ -570,3 +570,143 @@
 =========== End POST =========
 ==============================
 */
+
+
+/* admin*/
+.admin_tasks  {
+text-align: center;
+
+}
+.admin_tasks input {
+width: 45% ;
+height: 40px ;
+}
+.admin_tasks table {
+ width: 00px;
+ height: 30px ;
+  color: blue ;
+  padding: 10px 10px ;
+  margin-left:  550px ;
+ 
+
+}
+.admin_tasks table  td{
+ 
+  padding: 5px 5px ;
+  
+ 
+
+}
+.admin_tasks a {
+ text-decoration: none;
+ color: black ;
+}
+.dropbtn {
+ 
+  color: black;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+
+  
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #ddd ;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #ddd;
+}
+.users_data  {
+  margin-left: 270px ;
+  text-align: left;
+ 
+  height: 50px ;
+}
+.users_data table {
+  text-align: left;
+  width: 70%;
+  height: 50px ;
+  padding: 20px 20px ;
+}
+.users_data table th {
+  padding: 20px 20px ;
+  background-color: #4CAF50;
+  color: white;
+}
+.users_data table td {
+  padding: 10px 10px ;
+ border-bottom: 1px solid #ddd;
+ text-align: left;
+  
+}
+.users_data button {
+ 
+  border: none;
+  color: white;
+  padding: 10px 22px;
+  text-align: center;
+  text-decoration: none;
+ 
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+   
+  
+}
+
+.users_data_button1  {
+  background-color: #4CAF50; /* Green */
+}
+.users_data_button2  {
+  
+  background-color:#f44336 ;
+ 
+}
+.m_content{
+  max-width: 300px ;
+  width: 300px ;
+  display:  inline-grid;
+  margin: 20px ;
+  width: 165px ;
+  height: 230px ;
+  background-color: rgba(0,0,0,0.1);
+  text-align: center;
+  border-radius: 10% 10% 10% 1%;
+}
+.m_content2{
+  margin-top: -15px;
+ bottom: 0px ;
+ text-align: center;
+}
+
+.m_content img {
+  margin-top: 5px;
+   border-radius: 30% 30% 50% 1% ;
+  width: 150px ;
+  height: 150px ;
+  
