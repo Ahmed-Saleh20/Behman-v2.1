@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Mar 31, 2020 at 11:14 PM
+-- Host: 127.0.0.1
+-- Generation Time: Apr 08, 2020 at 07:29 AM
 -- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.3
+-- PHP Version: 7.4.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -44,6 +43,89 @@ CREATE TABLE `comments` (
 INSERT INTO `comments` (`com_id`, `post_id`, `user_id`, `comment`, `comment_author`, `date`) VALUES
 (6, 22, 10, 'Depression (major depressive disorder) is a common and serious medical illness that negatively affects how you feel, the way you think and how you act. Fortunately, it is also treatable. Depression causes feelings of sadness and/or a loss of interest in a', 'doctor samy_mohamed_883013', '2020-03-12 01:52:44'),
 (7, 20, 9, '2nt 3abet yad', 'doctor samy_mohamed_883013', '2020-03-19 18:42:50');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `file`
+--
+
+CREATE TABLE `file` (
+  `file_id` int(11) NOT NULL,
+  `file` varchar(255) NOT NULL,
+  `file_image` varchar(255) NOT NULL,
+  `file_time` timestamp NOT NULL DEFAULT current_timestamp(),
+  `parent_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `file`
+--
+
+INSERT INTO `file` (`file_id`, `file`, `file_image`, `file_time`, `parent_id`, `user_id`) VALUES
+(158, '06_Tree.ppsx', 'powerpoint.png', '2020-04-08 04:56:49', 71, 8),
+(159, 'Sheet1.pdf', 'pdf.png', '2020-04-08 04:57:46', 71, 8),
+(160, 'Sheet2.pdf', 'pdf.png', '2020-04-08 04:57:55', 71, 8),
+(161, '9.rar', 'unknownfile.png', '2020-04-08 04:58:00', 71, 8),
+(163, '1.docx', 'word.png', '2020-04-08 05:00:07', 71, 8),
+(164, 'cola2 (1) (3).xls', 'excel.png', '2020-04-08 05:00:14', 71, 8),
+(165, 'Lecture_1.pdf', 'pdf.png', '2020-04-08 05:01:30', 72, 8),
+(166, 'Lecture_2.pdf', 'pdf.png', '2020-04-08 05:01:34', 72, 8),
+(167, 'Lecture_4.pdf', 'pdf.png', '2020-04-08 05:01:38', 72, 8),
+(168, 'Lecture_6.pdf', 'pdf.png', '2020-04-08 05:01:44', 72, 8),
+(169, 'Lecture_7.pdf', 'pdf.png', '2020-04-08 05:01:48', 72, 8),
+(170, 'Lecture_8.pdf', 'pdf.png', '2020-04-08 05:01:54', 72, 8);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `folder`
+--
+
+CREATE TABLE `folder` (
+  `folder_id` int(11) NOT NULL,
+  `folder_name` varchar(255) NOT NULL,
+  `folder_time` timestamp NOT NULL DEFAULT current_timestamp(),
+  `privacy` int(11) NOT NULL,
+  `parent_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `folder`
+--
+
+INSERT INTO `folder` (`folder_id`, `folder_name`, `folder_time`, `privacy`, `parent_id`, `user_id`) VALUES
+(71, 'Data Structures', '2020-04-08 04:52:45', 1, 0, 8),
+(72, 'Lectures', '2020-04-08 04:53:07', 1, 71, 8),
+(73, 'Sections', '2020-04-08 04:53:13', 1, 71, 8),
+(74, 'Statistics', '2020-04-08 05:02:38', 1, 0, 8);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `playlist`
+--
+
+CREATE TABLE `playlist` (
+  `list_id` int(11) NOT NULL,
+  `list_name` varchar(255) NOT NULL,
+  `list_pic` varchar(255) NOT NULL,
+  `list_time` timestamp NULL DEFAULT current_timestamp(),
+  `list_videos` int(255) NOT NULL,
+  `privacy` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `playlist`
+--
+
+INSERT INTO `playlist` (`list_id`, `list_name`, `list_pic`, `list_time`, `list_videos`, `privacy`, `user_id`) VALUES
+(93, 'Favorite Songs 2019', 'songs.png.269', '2020-04-08 04:32:01', 11, 1, 8),
+(94, 'How to', 'default_playlist_image.jpg', '2020-04-08 04:51:29', 2, 1, 8),
+(95, 'انجازاتك في الحياة', 'empty.jpg.337', '2020-04-08 05:08:44', 0, 1, 8);
 
 -- --------------------------------------------------------
 
@@ -166,6 +248,44 @@ INSERT INTO `user_messages` (`id`, `user_to`, `user_from`, `msg_body`, `date`, `
 (2, 3, 2, 'Hello', '2020-03-01 11:49:22', 'no'),
 (3, 3, 2, 'hello', '2020-03-01 11:49:33', 'no');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `video`
+--
+
+CREATE TABLE `video` (
+  `video_id` int(11) NOT NULL,
+  `video_title` varchar(255) NOT NULL,
+  `video_desc` text DEFAULT NULL,
+  `video` varchar(255) NOT NULL,
+  `video_time` timestamp NOT NULL DEFAULT current_timestamp(),
+  `video_pic` varchar(255) NOT NULL,
+  `video_duration_hours` int(11) NOT NULL,
+  `video_duration_minutes` int(11) NOT NULL,
+  `video_duration_seconds` int(11) NOT NULL,
+  `views` int(255) NOT NULL,
+  `playlist_id` int(11) DEFAULT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `video`
+--
+
+INSERT INTO `video` (`video_id`, `video_title`, `video_desc`, `video`, `video_time`, `video_pic`, `video_duration_hours`, `video_duration_minutes`, `video_duration_seconds`, `views`, `playlist_id`, `user_id`) VALUES
+(127, 'ya ghaly - Noran Tayeb', 'Description of video will appear hear: \r\n Description is the pattern of narrative development that aims to make vivid a place, object, character, or group. Description is one of four rhetorical modes, along with exposition, argumentation, and narration. In practice it would be difficult to write literature that drew on just one of the four basic modes', 'videoplayback.mp4.452', '2020-04-08 04:34:30', 'video_pic.452.png', 0, 3, 0, 5, 93, 8),
+(128, 'Baby Shark', 'Description of video will appear hear: Description is the pattern of narrative development that aims to make vivid a place, object, character, or group. Description is one of four rhetorical modes, along with exposition, argumentation, and narration. In practice it would be difficult to write literature that drew on just one of the four basic modes', 'videoplayback (7).mp4.5', '2020-04-08 04:37:54', 'video_pic.5.png', 0, 2, 16, 3, 93, 8),
+(129, 'Halaa Roushdy', 'Description of video will appear hear: Description is the pattern of narrative development that aims to make vivid a place, object, character, or group. Description is one of four rhetorical modes, along with exposition, argumentation, and narration. In practice it would be difficult to write literature that drew on just one of the four basic modes', 'videoplayback (4).mp4.32', '2020-04-08 04:39:46', 'video_pic.32.png', 0, 3, 20, 4, 93, 8),
+(130, 'wak wak wak', 'Description of video will appear hear: Description is the pattern of narrative development that aims to make vivid a place, object, character, or group. Description is one of four rhetorical modes, along with exposition, argumentation, and narration. In practice it would be difficult to write literature that drew on just one of the four basic modes', 'videoplayback (8).mp4.413', '2020-04-08 04:40:25', 'video_pic.413.png', 0, 1, 46, 0, 93, 8),
+(131, 'i used to believe', 'Description of video will appear hear: Description is the pattern of narrative development that aims to make vivid a place, object, character, or group. Description is one of four rhetorical modes, along with exposition, argumentation, and narration. In practice it would be difficult to write literature that drew on just one of the four basic modes', 'videoplayback (1).mp4.495', '2020-04-08 04:41:16', 'video_pic.495.png', 0, 0, 59, 4, 93, 8),
+(132, 'See you again', 'Description of video will appear hear: Description is the pattern of narrative development that aims to make vivid a place, object, character, or group. Description is one of four rhetorical modes, along with exposition, argumentation, and narration. In practice it would be difficult to write literature that drew on just one of the four basic modes', 'videoplayback (3).mp4.145', '2020-04-08 04:42:45', 'video_pic.145.png', 0, 0, 38, 2, 93, 8),
+(133, 'The Bearded Man', 'Description of video will appear hear: Description is the pattern of narrative development that aims to make vivid a place, object, character, or group. Description is one of four rhetorical modes, along with exposition, argumentation, and narration. In practice it would be difficult to write literature that drew on just one of the four basic modes', 'videoplayback (6).mp4.28', '2020-04-08 04:44:35', 'video_pic.28.png', 0, 2, 16, 2, 93, 8),
+(134, 'Dead Kennedys', 'Description of video will appear hear: Description is the pattern of narrative development that aims to make vivid a place, object, character, or group. Description is one of four rhetorical modes, along with exposition, argumentation, and narration. In practice it would be difficult to write literature that drew on just one of the four basic modes', 'videoplayback (5).mp4.107', '2020-04-08 04:45:24', 'video_pic.107.png', 0, 0, 31, 2, 93, 8),
+(136, 'Cartoon', '', 'videoplayback (11).mp4.415', '2020-04-08 04:50:58', 'video_pic.415.png', 0, 0, 59, 2, 93, 8),
+(137, 'Cartoon', '', 'videoplayback (9).mp4.93', '2020-04-08 05:04:14', 'video_pic.93.png', 0, 0, 39, 3, 94, 8),
+(138, 'Nature', 'this is Natural images', 'video1.mp4.117', '2020-04-08 05:05:22', 'video_pic.117.png', 0, 0, 18, 2, 94, 8);
+
 --
 -- Indexes for dumped tables
 --
@@ -175,6 +295,27 @@ INSERT INTO `user_messages` (`id`, `user_to`, `user_from`, `msg_body`, `date`, `
 --
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`com_id`);
+
+--
+-- Indexes for table `file`
+--
+ALTER TABLE `file`
+  ADD PRIMARY KEY (`file_id`),
+  ADD KEY `folder_id` (`parent_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `folder`
+--
+ALTER TABLE `folder`
+  ADD PRIMARY KEY (`folder_id`);
+
+--
+-- Indexes for table `playlist`
+--
+ALTER TABLE `playlist`
+  ADD PRIMARY KEY (`list_id`),
+  ADD KEY `playlist_ibfk_1` (`user_id`);
 
 --
 -- Indexes for table `posts`
@@ -202,6 +343,14 @@ ALTER TABLE `user_messages`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `video`
+--
+ALTER TABLE `video`
+  ADD PRIMARY KEY (`video_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `playlist_id` (`playlist_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -210,6 +359,24 @@ ALTER TABLE `user_messages`
 --
 ALTER TABLE `comments`
   MODIFY `com_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `file`
+--
+ALTER TABLE `file`
+  MODIFY `file_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=171;
+
+--
+-- AUTO_INCREMENT for table `folder`
+--
+ALTER TABLE `folder`
+  MODIFY `folder_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+
+--
+-- AUTO_INCREMENT for table `playlist`
+--
+ALTER TABLE `playlist`
+  MODIFY `list_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 
 --
 -- AUTO_INCREMENT for table `posts`
@@ -228,6 +395,36 @@ ALTER TABLE `users`
 --
 ALTER TABLE `user_messages`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `video`
+--
+ALTER TABLE `video`
+  MODIFY `video_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=139;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `file`
+--
+ALTER TABLE `file`
+  ADD CONSTRAINT `file_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `folder` (`folder_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `file_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `playlist`
+--
+ALTER TABLE `playlist`
+  ADD CONSTRAINT `playlist_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `video`
+--
+ALTER TABLE `video`
+  ADD CONSTRAINT `video_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `video_ibfk_2` FOREIGN KEY (`playlist_id`) REFERENCES `playlist` (`list_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

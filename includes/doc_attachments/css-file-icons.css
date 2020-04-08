@@ -1,0 +1,1 @@
+.fi{transition:all .2s ease-in-out;cursor:pointer;font-family:sans-serif;text-decoration:none;}.fi:after,.fi:before{position:absolute;pointer-events:none}.fi:before{top:0;height:100%;left:0;right:10px}.fi:after{width:0;height:0;border-width:10px 0 0 10px;border-color:transparent transparent transparent #66b0ff;top:0;right:0}.fi:hover{transform:translateY(-5px)}

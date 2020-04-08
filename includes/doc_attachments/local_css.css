@@ -1,0 +1,95 @@
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid #e3e6f0;
+  border-radius: 0.35rem;
+}
+.filehover:hover{transition:all .2s;transform:translateY(-5px)}
+div.hov:hover{
+  background-color: rgba(0,0,0,0);
+
+}
+div.hov1:hover{
+  background-color: rgba(0,0,0,0.5);
+
+}
+.videocard {
+ margin-:2px;
+  position: relative;
+  display: inline-flex;
+  flex-direction: row;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid #e3e6f0;
+  border-radius: 0.35rem;
+}
+.mb-4,
+.my-4 {
+  margin-bottom: 1.5rem !important;
+}
+.shadow {
+  box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15) !important;
+}
+.card-header {
+  display: inline-block;
+  padding: 0rem 0rem;
+  margin-bottom: 0;
+  background-color: #f8f9fc;
+  border-bottom: 1px solid #e3e6f0;
+}
+.py-3 {
+  padding-top: 0rem !important;
+}
+.m-0 {
+  margin: 0 !important;
+}
+.text-primary {
+  color: #4e73df !important;
+}
+.card-body {
+
+  flex: 1 1 auto;
+  padding: 1.25rem;
+  display: auto;
+}
+.font-weight-bold {
+  font-weight: 700 !important;
+}
+.post-button .show-btn,.share-area{
+  float:right;
+}
+.share-form{
+  max-width: 200px;
+  height: 150px;
+}
+.share-copy-button{
+  position: relative;
+  bottom: 9px;
+  padding: 4px 10px;
+}
+/*svg play botton*/
+.play-btn {
+  width: 25%;
+  height: auto;
+  margin: 0 auto;
+  margin-top: 10%;
+}
+
+.play-btn__svg{
+  transition: 0.3s; 
+  fill:#7c7c7c; 
+  opacity: .5;
+}
+
+.play-btn:hover .play-btn__svg {
+  margin-left: 0px;
+  fill: #a41d33;
+  opacity: 1;
+}

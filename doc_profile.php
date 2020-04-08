@@ -188,12 +188,19 @@
 				<?php
 					echo"<a href='#' class='btn btn-info multi-btn'/>Test</a>";
 					echo"<a href='#' class='btn btn-default multi-btn'/>Test</a>";
-					echo"<a href='#' class='btn btn-info multi-btn'/>Test</a>";		
+					echo"<a href='#' class='btn btn-info multi-btn'/>Test</a>";
 					if($user_id != $userown_id){
 						echo"<a href='#' class='btn btn-info multi-btn' data-toggle='modal' data-target='#exampleModal' data-whatever='@mdo'/>Ask Private</a>";
 					}else{
 						echo"<a href='private_post.php' class='btn btn-default multi-btn'/>Private Questions</a>";	
 					}
+					?>
+					<form action='playlists.php?u_id=<?php echo $user_id ?>' method='POST' enctype='multipart/form-data'>
+						<center>
+						    <button style="width: 170px; margin-left:-110px; background-color:black;" class='btn btn-info multi-btn'>playlists</button>
+						</center>
+					</form>
+					<?php
 				?>
 			</div>
 		</div>
