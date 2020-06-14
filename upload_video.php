@@ -18,6 +18,7 @@
 	$count = $stmt->rowCount();
 	if($count > 0 ){
 		$playlist_id = $row['list_id'];
+		$playlist_name = $row['list_name'];
 		$user_id     = $row['user_id'];
 		$videos  = $row['list_videos'];
 		$videos = $videos + 1;
@@ -81,10 +82,29 @@
 		<?php
 		if ($user_id == $userown_id) {
 		 ?>
+
+		 	<div style="display:inline-flex;">
+			<div id="example"><i style=" margin-left:10px;margin-top:10px;" class="fa fa-th fa-2x"></i></div>
+
+<!-- 		 <button type="button" id="example" class="btn btn-primary">example</button>
+ -->
 <!-- action='upload_video.php?list_id=<?php echo $playlist_id ?>' -->
+			<script>
+
+				$(document).ready(function() {
+				    $("#example").popover({
+				        placement: 'bottom',
+				        html: 'true',
+				         content:'<button class="btn" style="padding:7px;padding-right:17px;color:blue;" type="button" data-toggle="modal" data-target="#edit" data-whatever="@mdo"><i class="fa fa-edit"> Edit Playlist</i></button> <br> <button style="padding:7px;margin-top:5px;color:red;" class="btn" type="button" data-toggle="modal" data-target="#delete" data-whatever="@mdo"><i class="fa fa-times"> Delete Playlist</i></button>',
+				        
+				    	});
+					});  
+				</script> 
+	    
 	    <form action='add_video.php?list_id=<?php echo $playlist_id ?>' method='POST' enctype='multipart/form-data'> 
-		    <button  style="border:gray solid 0.5px;float:right;margin:7px;margin-right:15px;"  name='upload_video' class='btn '><img src="includes/doc_attachments/playlist/icons/plus.png" style="width: 15px;height: 15px;"> upload video</butto>
+		    <button  style=" border:gray solid 0.5px;float:right;margin:7px;margin-right:15px;margin-left:950px;"  name='upload_video' class='btn '><img src="includes/doc_attachments/playlist/icons/plus.png" style="width: 15px;height: 15px;"> upload video</button>
 	    </form>
+	    </div>
 
 	<?php } ?>
         </div>
@@ -190,6 +210,94 @@
       </div>
     </div>
 <?php } ?>
+
+	<!-- Start Delete Popup -->
+	<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 100px;">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	      	<center>
+	      		<h4 class="modal-title" id="exampleModalLabel" style="display:inline-block;">Are you sure delete ' <?php echo $playlist_name;?> '
+	      		</h4>
+	      	</center>
+	        <button style="margin-top:-35px;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+
+
+	      	<form action='update_delete_playlist.php?list_id=<?php echo $playlist_id ?>' method='POST' enctype='multipart/form-data'>
+	    	<center>
+	    		<p style=" "><strong style="text-decoration: underline;">Hint:</strong> All videos in this playlist will delete too</p>
+	    		<br>
+				<span style="display:inline-flex;">
+			            <button  style="border:gray solid 0.5px; margin-right: 50px;margin-left:50px; height: 35px;" name='delete_playlist' class='btn btn-info'>Delete</butto>
+			            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+			    </span>
+		       </span>
+		    </center>
+	        </form>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<!-- End Delete Popup -->
+
+	<!-- Start Edit Popup -->
+	<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 100px;">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	      	<center>
+	      		<h4 class="modal-title" id="exampleModalLabel" style="display:inline-block;">Edit This Playlist
+	      		</h4>
+	      	</center>
+	        <button style="margin-top:-35px;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+
+
+	      	<form action='update_delete_playlist.php?list_id=<?php echo $playlist_id ?>' method='POST' enctype='multipart/form-data'>
+	    	<center>
+	      		<span style="display:inline-flex;">
+					<h4 style="margin-right: 32px;" >Title</h4><input value="<?php echo $playlist_name;?>" maxlength="56" class="form-control" type="text" name="playlist_title" required="" style="width:250px;">
+
+				</span>
+				<span style="display:inline-flex;margin-top:15px;">
+					<h4 style="margin-right: 5px;">Picture</h4>
+						<div style="" class="form-group input-group">
+							<input  type="file" style="width:250px; margin-left: 5px;border-radius:5px;" class="form-control" name="playlist_image">
+						</div>
+				</span><br>
+				<span style="display:inline-flex;">
+			            <button  style="border:gray solid 0.5px; margin-right: 50px;margin-left:50px; height: 35px;" name='update_playlist' class='btn btn-info'>Save</butto>
+			            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+			    </span>
+		       </span>
+		    </center>
+	        </form>
+	       <!--  <form action="post.php?do=private" method="POST">
+	        	<input type="hidden" name="doc_id" value="<?php echo $id ?>"/>
+	          <div class="form-group">
+	            <label for="message-text" class="col-form-label">Message:</label>
+	            <textarea class="form-control" id="message-text" name="content"rows="4"></textarea>
+	          </div>
+	      </div>
+	      <div class="modal-footer">
+	      	<input type="submit" value="Send message" name="message" class="btn btn-info"/>
+	      	</form> -->
+	        
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<!-- End Edit Popup -->
+
+
 	<?php
 	include 'includes/templates/footer.php';
 ?>
+

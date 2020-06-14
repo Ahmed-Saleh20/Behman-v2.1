@@ -102,7 +102,7 @@
 			$list_videos = $list['list_videos'];
 
             ?>
- 
+    <!-- <div class="task" data-id="1" style="display:inline-flex;"> -->
       	<a class="all" href='upload_video.php?list_id=<?php echo $list_id ?>' title="View all Videos" style="text-decoration:none; display: inline-flex;">
       	<div>
 		        <div style="margin:5px; width: 246px;height: 137px; background-image: url('includes/doc_attachments/playlist/playlists_image/<?php echo $list_picture;?>');background-repeat: no-repeat;background-size: 100% 100%;" >
@@ -126,8 +126,19 @@
 
 		         echo $list_name ; ?></h4></div>
 		        <div style="color: #606060; width: 200px;margin-left: 10px;margin-bottom:15px;margin-top: -10px;"><h6><?php echo"created on ".$list_time;?></h6></div>
-		</div></a>
-		       
+		</div>
+	</a>
+
+<!-- 		<nav id="context-menu" class="context-menu" style="margin-top:-50px;margin-left:-150px;">
+		    <ul class="context-menu__items">
+		      <li class="context-menu__item">
+		        <a href="www.facebook.com" class="context-menu__link" data-action="Edit"><i class="fa fa-edit"></i> Edit Task</a>
+		      </li>
+		      <li class="context-menu__item">
+		        <a href='upload_video.php?list_id=<?php echo $list_id ?>' target="_blank" class="context-menu__link">Delete Task</a>
+		      </li>
+		    </ul>
+	</nav>    -->    
 <?php 
 	}
 	}
@@ -140,6 +151,10 @@
     </div>	
      
        <!--End Display Playlists  -->
+
+
+       <!-- custom right click -->
+
     <!-- upload file php code -->
 
 <?php } ?>
@@ -199,6 +214,7 @@
 	<?php
 	include 'includes/templates/footer.php';
 ?>
+
 		              <!-- <div  style="width: 225px;height: 210px;" class="videocard shadow ">
 		               
 		              </div> -->

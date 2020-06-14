@@ -103,9 +103,24 @@
 				<video style=" margin-top: 2px; margin-left: 40px;margin-right:20px;" width="620" height="350" controls="">
 					<source src="includes/doc_attachments/playlist/videos/<?php echo $current_video;?>" type="">
 				</video><br>
+				<div id="example"><i style=" margin-left:40px;margin-top:5px;margin-bottom:-15px;" class="fa fa-th fa-2x"></i></div>
+
+			<script>
+
+				$(document).ready(function() {
+				    $("#example").popover({
+				        placement: 'left',
+				        html: 'true',
+				         content:'<button class="btn" style="padding:7px;padding-right:17px;color:blue;" type="button" data-toggle="modal" data-target="#edit" data-whatever="@mdo"><i class="fa fa-edit"> Edit Video</i></button> <br> <button style="padding:7px;margin-top:5px;color:red;" class="btn" type="button" data-toggle="modal" data-target="#delete" data-whatever="@mdo"><i class="fa fa-times"> Delete Video</i></button>',
+				        
+				    	});
+					});  
+			</script>
+
 
 			               <div style="width: 600px; margin-left: 45px; margin-top: 15px;">
-			              		<?php 								 $date = new DateTime($current_video_time);
+			              		<?php 								 
+			              		$date = new DateTime($current_video_time);
 								    $current_video_time = $date->format('Y-m-d');
 
 			              			echo "<h3 style='color:
@@ -259,6 +274,78 @@
     </div>	
 
 <?php } ?>
+
+	<!-- Start Edit Popup -->
+	<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top:50px;">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	      	<center>
+	      		<h4 class="modal-title" id="exampleModalLabel" style="display:inline-block;">Edit Video</h4>
+	      		</h4>
+	      	</center>
+	        <button style="margin-top:-35px;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+
+	      	<center>
+		    <form action='update_delete_video.php?v_id=<?php echo $video_id ?>' method='POST' enctype='multipart/form-data'>
+		    	
+			<span style="">
+
+	                <label><h4 style="margin-top:30px;">video tittle</h4><input maxlength="102" value="<?php echo $current_video_title; ?>" class="form-control" type="text" name="video_title" required="" style=" width: 300px;border-radius:5px;"></label><br>
+
+					<label style=""><h4 style="margin-left:25px;" >video descrption</h4><textarea value="<?php echo $current_video_desc; ?>" style="width: 300px;margin-left: 0px;" class="form-control" rows="4" name="video_desc"><?php echo $current_video_desc; ?></textarea></label><br>
+
+				<div style="display:inline-flex;">
+			        <button class="btn btn-info" style="margin-bottom: 60px;margin-top:20px;width:70px;border: solid 0.5px;" name='update_video'>Save</button>
+			        <button class="btn btn-danger" style="margin-bottom: 60px;margin-top:20px;margin-left: 50px; width:70px;border: solid 0.5px;" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+			    </div>
+			</span>
+		    </form>
+		    </center>   
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<!-- End Edit Popup -->
+
+
+
+	<!-- Start Delete Popup -->
+	<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 100px;">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	      	<center>
+	      		<h4 class="modal-title" id="exampleModalLabel" style="display:inline-block;">Are you sure delete video ' <?php echo $current_video_title;?> '
+	      		</h4>
+	      	</center>
+	        <button style="margin-top:-35px;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+
+
+	      	<form action='update_delete_video.php?v_id=<?php echo $video_id ?>' method='POST' enctype='multipart/form-data'>
+	    	<center>
+	    		
+				<span style="display:inline-flex;">
+			            <button  style="border:gray solid 0.5px; margin-right: 50px;margin-left:50px; height: 35px;" name='delete_video' class='btn btn-info'>Delete</butto>
+			            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+			    </span>
+		       </span>
+		    </center>
+	        </form>    
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<!-- End Delete Popup -->
+
 
 	<?php
 	include 'includes/templates/footer.php';

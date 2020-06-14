@@ -9,9 +9,13 @@
 	}else{ 
 ?>
 
+
 <head>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 	<link rel="stylesheet" href="layout/css/Bootstrap v3.3.7 bootstrap.min.css"/>
 </head>
+
+
 <?php
 
 	$user_id = isset($_GET['u_id']) && is_numeric($_GET['u_id']) ? intval($_GET['u_id']) : 0 ;
@@ -42,6 +46,7 @@
 		$row = $get_user  ->fetch();	
 		$userown_id = $row['user_id'];
 		$user_name = $row['user_name'];
+		$type = $row['type'];
 
 ?>
 
@@ -146,7 +151,302 @@
 	?>
 	<!-- End Cover And Pic Profile Area -->
 
-	<!-- Start Doctor Information -->
+	<?php 
+		$stmt = $con->prepare("SELECT Rate FROM rate WHERE Doc_ID = $user_id");
+		$stmt->execute(array($user_id));
+		$row = $stmt->fetch();
+		$count = $stmt->rowCount();
+
+		$stmt = $con->prepare("SELECT SUM(Rate) AS total FROM rate WHERE Doc_ID = $user_id");
+		$stmt->execute();
+		$row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+		
+	?>
+		<center>
+		    <div align="center" style="padding: 0px;color:blue;font-size:20px; display:inline-flex;">
+		    	
+			          <?php 
+			         	if ($row['total'] && $count) {
+			         		$average = $row['total']/$count;
+			         	 		echo round($average,1);
+			         		 }
+			         	else{echo 1;}
+			           ?> <i style="color:red;margin-right:0px;margin-left:5px;margin-top:3px;" class="fa fa-star fa-1x"></i>
+			</div>
+			<?php 
+				if ($type ==1 ) {
+					
+				}
+				else
+				{?>
+				<a href='#' data-toggle='modal' data-target='#rate' data-whatever='@mdo' style="text-decoration:none;" >add your rate</a>
+				<?php }
+
+			?>
+			
+		</center>
+
+
+	<!-- Start rate Popup -->
+	<center>
+	<div class="modal" id="rate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top:200px;">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	        <form action="doc_profile.php?u_id=<?php echo $user_id ?>" method='POST' enctype='multipart/form-data' style="display: inline-flex;">
+	        		<div align="center" style="margin:20px;margin-left:15px;">
+				        <i class="fa fa-star fa-2x hav" data-index="0"></i>
+				        <i class="fa fa-star fa-2x hav" data-index="1"></i>
+				        <i class="fa fa-star fa-2x hav" data-index="2"></i>
+				        <i class="fa fa-star fa-2x hav" data-index="3"></i>
+				        <i class="fa fa-star fa-2x hav" data-index="4"></i>
+				    </div>
+				<textarea style="display:none;" type="hidden" name="my_rate" id="myrate"></textarea>
+    			<button name="saverate" class="btn btn-info" style="max-height:40px;margin-top: 15px; margin-right:15px;">Add rate</button>
+    <script src="http://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+    <script>
+        var ratedIndex = -1, uID = 0, doc_ID= "<?php echo $user_id; ?>", user_ID= "<?php echo $userown_id; ?>";
+
+        $(document).ready(function () {
+            resetStarColors();
+
+            $('.hav').on('click', function () {
+               ratedIndex = parseInt($(this).data('index'));
+               localStorage.setItem('ratedIndex', ratedIndex);
+               document.getElementById('myrate').innerHTML = ratedIndex;
+               // window.alert(ratedIndex);
+            });
+            $('.hav').mouseover(function () {
+                resetStarColors();
+                var currentIndex = parseInt($(this).data('index'));
+                setStars(currentIndex);
+            });
+
+            $('.hav').mouseleave(function () {
+                resetStarColors();
+
+                if (ratedIndex != -1)
+                      setStars(ratedIndex);
+            });
+        });
+
+        function setStars(max) {
+            for (var i=0; i <= max; i++)
+                $('.hav:eq('+i+')').css('color', 'red');
+        }
+
+        function resetStarColors() {
+            $('.hav').css('color', 'gray');
+        }
+    </script>
+    			
+   	      	</form>
+	    </div>
+	  </div>
+	</div>
+</center>
+<?php
+    if (isset($_POST['saverate'])) {
+        $ratedIndex =$_POST['my_rate'];
+        $ratedIndex++;
+
+        if (1) {
+				$insert = $con->prepare("INSERT into rate(Doc_ID,User_ID,Rate)values('$user_id','$userown_id','$ratedIndex')");
+				$insert ->execute();                
+			    if($insert){
+		        // echo "<script>alert('rating added')</script>";
+			       //  echo "<script>alert($ratedIndex)</script>";
+	
+			          	}
+			    else
+			    {
+			        echo "<script>alert('can't add rate)</script>";
+
+			    }
+        } else
+            $conn->query("UPDATE stars SET rateIndex='$ratedIndex' WHERE id='$uID'");
+
+    }
+?>
+	<!-- End rate Popup -->
+
+
+<div class="container">
+  <ul class="nav nav-pills" style="margin-left:0px;font-size:20px;border-color:#DDD;background-color:rgb(0,0,0,0.2);margin-bottom:50px;margin-top:0;">
+    <li class="active"><a data-toggle="pill" href="#home">Replay</a></li>
+    <li style="margin-left:0px;"><?php 
+	      		if($user_id != $userown_id){
+					echo"<a href='#' data-toggle='modal' data-target='#exampleModal' data-whatever='@mdo'/>Ask Private</a>";
+				}else{
+						echo"<a data-toggle='pill' href='#menu1'>Private Question</a>";	
+				}
+
+	      ?></li>
+    			
+	<li class="dropdown" style="margin-left:0px;">
+		          <a href="#" class='dropdown-toggle' data-toggle='dropdown'><span>Attachments <i class='glyphicon glyphicon-triangle-bottom'></i></span></a>
+		          <ul class='dropdown-menu'>
+		            <li>
+		           		<form action='playlists.php?u_id=<?php echo $user_id ?>' method='POST' enctype='multipart/form-data'>
+		            		<button style="width: 160px;" class='btn'>playlists</button>
+						</form>
+		            </li>
+		            <li>
+		           		<form action='doc_folders.php?u_id=<?php echo $user_id ?>' method='POST' enctype='multipart/form-data'>
+		            		<button style="width: 160px;margin-top:-13px;margin-bottom: -15px;" class='btn'>Files</button>
+						</form>
+		            </li>
+		          </ul>
+	</li>
+		    
+
+    <li style="margin-left:0px;"><a data-toggle="pill" href="#menu4">Chat</a></li>
+    <li style="margin-left:0px;"><a data-toggle="pill" href="#menu3">About</a></li>
+  </ul>
+  </div>
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+    		<div class='row'>
+		<div class='col-sm-1'> </div>
+	<!-- Start Displaying Users own Posts-->
+	<div class="col-sm-8">
+		<?php
+			$get_posts = $con->prepare("SELECT * from posts where user_id='$user_id' ORDER by 1 DESC LIMIT 5");
+			$get_posts ->execute();
+			$posts = $get_posts ->fetchAll();	
+			
+			foreach ($posts as $key => $row_posts){
+
+				$post_id = $row_posts['post_id'];
+				$user_id = $row_posts['user_id'];
+				$content = $row_posts['post_content'];
+				$post_date = $row_posts['post_date'];
+			
+				$get_user = $con->prepare("SELECT * from users where user_id='$user_id' AND posts='yes'");
+				$get_user ->execute();
+				$user = $get_user ->fetch();				
+				$user_name = $user['user_name'];
+				$user_image = $user['user_image'];	 
+		?>
+		<center>
+		<div id='own_posts' >
+			<div class='row'>
+				<div class='col-sm-3'>
+					<p><img src='includes/images/users/<?php if(!empty($user_image)){ echo $user_image; }else{ echo 'default.png'; } ?>' class='img-circle' width='100px' height='100px'></p>
+				</div>
+				<div class='col-sm-8'>
+					<h3><a style='text-decoration: none;cursor: pointer;color: #3897f0;margin-left:15px ' href='doc_profile.php?u_id=$user_id'><?php echo $user_name?></a></h3>
+					<h4><small style='color:black; margin-left:15px'>Updated a post on <strong><?php echo $post_date?></strong></small></h4>
+				</div>
+				<div class='col-sm-1'> </div>
+			</div>
+			<div class='row'>
+				<div class='col-sm-1'> </div>
+				<div class='col-sm-10'>
+					<h3><p><?php echo $content?></p></h3>
+				</div>
+				<div class='col-sm-1'> </div>
+			</div>
+			<?php
+				if($user_id == $userown_id){
+					echo"
+					<a href='post.php?do=delete&post_id=$post_id' style='float:right;'><button class='btn btn-danger'>Delete</button></a>
+					<a href='post.php?do=edit&post_id=$post_id' style='float:right;margin-right:2px;'><button  class='btn btn-info'>Edit</button></a>
+					<a href='postDetails.php?post_id=$post_id' style='float:right;margin-right:2px;'><button class='btn btn-success'>View</button></a>
+					";
+				} 	
+			?>
+
+		</div></center><br>
+		<?php } ?>			
+	</div>
+</div>
+<!--End Displaying Users own Posts-->
+    </div>
+    <div id="menu1" class="tab-pane fade">
+	      <?php 
+	      		if($user_id != $userown_id){
+					echo"<a href='#' class='btn btn-info multi-btn'data-toggle='modal' data-target='#exampleModal' data-whatever='@mdo'/>Ask Private</a>";
+				}else{
+						 ?>
+						<div class='row'>
+						<div class='col-sm-2'> </div>
+						<div class='col-sm-8 post'>
+							<!-- Start Post's User Info  -->
+							<div class='row'>
+								<div class='col-sm-10 user'>
+									<img src='includes/images/users/<?php if(!empty($user_image)){ echo $user_image; }else{ echo 'default.png'; } ?>'>
+									<?php				
+										if($user_type == 1 ){
+							    			echo "<a class='name' href='doc_profile.php?u_id=$user_id'>$user_name</a>";
+							    		}else{
+							    			echo "<a class='name' href='user_profile.php?u_id=$user_id'>$user_name</a>";
+							    		}
+									?>	
+									<p class="date">Updated a post on <strong><?php echo $post_date ?></strong></p>
+								</div>
+								<div class='col-sm-2 owner-action'>
+								<?php if($user_id == $sessionuser_id){?>
+									<a href="post.php?do=edit&post_id=<?php echo $post_id ?>" class=" edit" title="Edit" ><i class="fa fa-pencil" aria-hidden="true"></i></a>
+									<a href="post.php?do=delete&post_id=<?php echo $post_id ?>" class="delete" title="Delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
+								<?php } ?>	
+								</div>
+							</div>
+							<!-- End Post's User Info  -->
+							<!-- Start Post Content -->
+							<div class='row'>
+								<div class='col-sm-1'> </div>
+								<div class='col-sm-10 content' >
+									<p><?php echo $content ?></p>
+								</div>
+								<div class='col-sm-1'></div>
+							</div>
+							<!-- End Post Content -->
+
+							<!-- Start Post Button Action -->
+							<div class="post-button">
+								<!-- Start Like Button -->
+						      	<i 
+						      	  <?php if (userLiked($post_id) ){?>
+						      		  class="fa fa-thumbs-up fa-7x like-btn"
+						      	  <?php }else{ ?>
+						      		  class="fa fa-thumbs-o-up fa-7x like-btn"
+						      	  <?php } ?>
+						      	  data-id="<?php echo $post_id; ?>">
+						      	</i>
+						      	<span class="likes numLikes"><?php echo getLikes($post_id); ?></span>
+							    <script src="layout/js/scripts.js"></script>
+							    <!-- End Like Button -->
+							    <!-- End Like Button -->
+								<a href='postDetails.php?post_id=<?php echo $post_id ?>' class='show-btn btn btn-info'>Comment</a>	
+								<div class="share-area">
+								  <div id="popover-div" class="col-sm-12 col-xs-12 col-md-9">
+								    <buttom id="share" class="btn btn-info change-trigger" data-original-title="Share a link to this post">Share</buttom>        
+								    <div class="hide" id="html-div">
+								      <form class="share-form">
+								        <div class="form-group">
+								          <input class="form-control share-link" id="post_link" type="text" readonly=""  value="<?php echo $share_post.$post_id ?>"/>
+								        </div>
+								        <div class="form-group">
+								          <a onclick="myFunction()" id="copy" class="share-copy-button btn btn-info">Copy link</a>
+				 				        </div>
+								      </form>
+								    </div>
+								  </div>
+								</div>
+							</div>
+							<!-- End Post Button Action -->
+						</div>
+						<div class='col-sm-2'> </div>
+					</div><br>
+
+				<?php } ?>
+
+	      ?>
+    </div>
+
+    <div id="menu3" class="tab-pane fade">
+    		<!-- Start Doctor Information -->
 	<div class="information">
 		<div class="row">
 			<div class="col-sm-1"></div>
@@ -206,6 +506,10 @@
 		</div>
 	</div>
 	<!-- End Doctor Information -->
+    </div>
+  </div>
+</div>
+
 
 	<!-- Start Private Post Popup -->
 	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -237,62 +541,6 @@
 	<!-- End Private Post Popup -->
 
 
-
-	<div class='row'>
-		<div class='col-sm-1'> </div>
-	<!-- Start Displaying Users own Posts-->
-	<div class="col-sm-8">
-		<?php
-			$get_posts = $con->prepare("SELECT * from posts where user_id='$user_id' ORDER by 1 DESC LIMIT 5");
-			$get_posts ->execute();
-			$posts = $get_posts ->fetchAll();	
-			
-			foreach ($posts as $key => $row_posts){
-
-				$post_id = $row_posts['post_id'];
-				$user_id = $row_posts['user_id'];
-				$content = $row_posts['post_content'];
-				$post_date = $row_posts['post_date'];
-			
-				$get_user = $con->prepare("SELECT * from users where user_id='$user_id' AND posts='yes'");
-				$get_user ->execute();
-				$user = $get_user ->fetch();				
-				$user_name = $user['user_name'];
-				$user_image = $user['user_image'];	 
-		?>
-		<div id='own_posts'>
-			<div class='row'>
-				<div class='col-sm-3'>
-					<p><img src='includes/images/users/<?php if(!empty($user_image)){ echo $user_image; }else{ echo 'default.png'; } ?>' class='img-circle' width='100px' height='100px'></p>
-				</div>
-				<div class='col-sm-8'>
-					<h3><a style='text-decoration: none;cursor: pointer;color: #3897f0;margin-left:15px ' href='doc_profile.php?u_id=$user_id'><?php echo $user_name?></a></h3>
-					<h4><small style='color:black; margin-left:15px'>Updated a post on <strong><?php echo $post_date?></strong></small></h4>
-				</div>
-				<div class='col-sm-1'> </div>
-			</div>
-			<div class='row'>
-				<div class='col-sm-1'> </div>
-				<div class='col-sm-10'>
-					<h3><p><?php echo $content?></p></h3>
-				</div>
-				<div class='col-sm-1'> </div>
-			</div>
-			<?php
-				if($user_id == $userown_id){
-					echo"
-					<a href='post.php?do=delete&post_id=$post_id' style='float:right;'><button class='btn btn-danger'>Delete</button></a>
-					<a href='post.php?do=edit&post_id=$post_id' style='float:right;margin-right:2px;'><button  class='btn btn-info'>Edit</button></a>
-					<a href='postDetails.php?post_id=$post_id' style='float:right;margin-right:2px;'><button class='btn btn-success'>View</button></a>
-					";
-				} 	
-			?>
-
-		</div><br>
-		<?php } ?>			
-	</div>
-</div>
-<!--End Displaying Users own Posts-->
 <?php }else{
 	    echo "<script>alert('There Is No ID Exist !')</script>";
         echo "<script>window.open('home.php','_self')</script>";
@@ -302,3 +550,5 @@
 <?php
 	include 'includes/templates/footer.php';				
 ?>
+ 
+

@@ -103,13 +103,14 @@
 				$folder_time = $folder['folder_time'];
 				$privacy     = $folder['privacy'];
             ?>
-
+            	<div class="task" data-id="2" style="display:inline-flex;">
             		<a href="doc_files.php?parent_id=<?php echo $folder_id ?>" title="<?php echo $folder_name;?>" style="text-decoration:none;">
 	            		<div class="card-header shadow" style=" white-space: nowrap;overflow: hidden;text-overflow: ellipsis;width:220px;height:50px; margin:5px;padding-top:rem; border-radius:6px;">
 	            			<img src="includes/doc_attachments/folder/icons/folder.png" style="width: 26px;height: 26px;margin:14px;margin-top:8px;">
 	            			<span style="margin-left:-10px; color:rgba(0,0,0,0.72);font-size: 20px; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"><?php echo $folder_name;?></span>
 	            		</div>
 	            	</a>
+	            </div>
             
 		       
 <?php 
