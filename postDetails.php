@@ -13,7 +13,6 @@
 <div class="container">
 	<div class="row">
 		<div class="col-sm-12">
-			<center><h2>Comments</h2><br></center>
 <?php 
 if(isset($_GET['post_id'])){
 
@@ -22,9 +21,10 @@ if(isset($_GET['post_id'])){
 		$get_posts ->execute();
 		$row_posts = $get_posts ->fetch();	
 		$post_id = $row_posts['post_id'];
-		$user_id = $row_posts['user_id'];
+		$user_id = 8;
 		$content = $row_posts['post_content'];
 		$post_date = $row_posts['post_date'];
+		$website = "http://localhost/Behman-v2.1/postDetails.php?post_id=";
 
 		//getting the user who has posted the thread
 		$user = $con->prepare("SELECT * from users where user_id='$user_id' AND posts='yes'");
@@ -84,7 +84,7 @@ if(isset($_GET['post_id'])){
 				<!-- Start Post Content -->
 				<div class='row'>
 					<div class='col-sm-1'> </div>
-					<div class='col-sm-10 content' >
+					<div class='col-sm-10' >
 						<p><?php echo $content ?></p>
 					</div>
 					<div class='col-sm-1'></div>
@@ -105,19 +105,22 @@ if(isset($_GET['post_id'])){
 				    <script src="layout/js/scripts.js"></script>
 				    <!-- End Like Button -->
 				    <!-- End Like Button -->
-					<a href='postDetails.php?post_id=<?php echo $post_id ?>' class='show-btn btn btn-info'>Comment</a>	
 					<div class="share-area">
-					  <div id="popover-div" class="col-sm-12 col-xs-12 col-md-9">
-					    <buttom id="share" class="btn btn-info change-trigger" data-original-title="Share a link to this post">Share</buttom>        
+					  <div id="popover-div" class="col-sm-12 col-xs-12 col-md-9" >
+					    <a id="share" class="btn btn-info change-trigger" data-original-title="Share a link to this post">Share</a>        
 					    <div class="hide" id="html-div">
-					      <form class="share-form">
-					        <div class="form-group">
-					          <input class="form-control share-link" id="post_link" type="text" readonly=""  value="<?php echo $share_post.$post_id ?>"/>
+					      <form class="share-form" style="height:70px;">
+					        <div class="form-group" style="display:inline-flex;">
+					          <input class="form-control share-link" id="post_link" type="text" readonly=""  value="<?php echo $website.$post_id ?>"/>
+					          <a onclick="myFunction()" id="copy" class="share-copy-button btn btn-info" style="margin-top:10px;margin-left:3px;padding-bottom:5px;">Copy</a>
 					        </div>
-					        <div class="form-group">
-					          <a onclick="myFunction()" id="copy" class="share-copy-button btn btn-info">Copy link</a>
-	 				        </div>
+
+					<div style="margin-top:-16px;display:inline-flex;">
+					    <a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $website.$post_id ?>" data-text="Behman is an amazing website, very recommended to you my friends." data-size="large">Tweet</a>
+						 <a class="fb-share-button" data-href="http://fcih.helwan.edu.eg/" data-type="button_count" data-size="large" style="margin-left: 5px;"></a>
+	 				</div>
 					      </form>
+					      
 					    </div>
 					  </div>
 					</div>
@@ -192,8 +195,22 @@ if(isset($_GET['post_id'])){
 		</div>
 	</div>
 </div>
+<script>(function(d, s, id) {
+	var js, fjs = d.getElementsByTagName(s)[0];
+	if (d.getElementById(id)) return;
+	js = d.createElement(s); js.id = id;
+	js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+	fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+</script>
+<script>
+!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script>
+
 <?php } ?>
 
 <?php
 	Include 'includes/templates/footer.php';
+
 ?>
+

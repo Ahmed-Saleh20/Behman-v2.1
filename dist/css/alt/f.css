@@ -1,0 +1,35 @@
+.small-box .overlay.dark > .fa,
+.small-box .overlay.dark > .fas,
+.small-box .overlay.dark > .far,
+.small-box .overlay.dark > .fab,
+.small-box .overlay.dark > .glyphicon,
+.small-box .overlay.dark > .ion {
+  color: #ced4da;
+}
+.small-box .overlay.dark {
+  background: rgba(0, 0, 0, 0.5);
+}
+.small-box .overlay > .fa,
+.small-box .overlay > .fas,
+.small-box .overlay > .far,
+.small-box .overlay > .fab,
+.small-box .overlay > .glyphicon,
+.small-box .overlay > .ion {
+  color: #343a40;
+}
+.small-box .overlay {
+  border-radius: 0.25rem;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.7);
+  display: flex;
+  justify-content: center;
+  z-index: 50;
+}
+.small-box > .overlay,
+.small-box > .loading-img {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}

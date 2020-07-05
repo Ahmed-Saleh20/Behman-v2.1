@@ -13,6 +13,8 @@
 <head>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 	<link rel="stylesheet" href="layout/css/Bootstrap v3.3.7 bootstrap.min.css"/>
+	<link rel="stylesheet" href="mystylesheet.css">
+
 </head>
 
 
@@ -38,6 +40,7 @@
 		$user_birthday = $row['user_birthday'];
 		$user_image = $row['user_image'];
 		$user_cover = $row['user_cover'];
+		$private_chat = $row['private_chat'];
 
 		/* Check IF User Is Owner User */
 		$user = $_SESSION['user_email'];
@@ -299,8 +302,18 @@
 		          </ul>
 	</li>
 		    
-
-    <li style="margin-left:0px;"><a data-toggle="pill" href="#menu4">Chat</a></li>
+	<?php 
+		if ($user_id == $userown_id) {
+	?>
+    <li style="margin-left:0px;"><a data-toggle="pill" href="#private_chat" >Chat</a></li>
+<?php } 
+	else{
+		if ($private_chat == 0) {?> 
+  		  <li style="margin-left:0px;"><a data-toggle="pill" href="#private_chat_user" >Chat</a></li>
+		<?php } 
+		else{ ?>
+    <li style="margin-left:0px;"><a href="user_private_chat.php?u_id=<?php echo $user_id; ?>">Chat</a></li>
+	<?php } }?>
     <li style="margin-left:0px;"><a data-toggle="pill" href="#menu3">About</a></li>
   </ul>
   </div>
@@ -444,7 +457,89 @@
 
 	      ?>
     </div>
+		    <div id="private_chat_user" class="tab-pane fade in " style="">
+		    		<center>	<h3 style="margin-left: 20px;margin-bottom: 50px;">Doctor <?php echo $f_name; ?> disactive his privte chat <i class="fa fa-frown-o fa-1x" aria-hidden="true"></i></h3></center>
+		    </div>
+    		<?php if ($private_chat == 1) {
+			?>
+    		<!-- get booked chats -->
+			<div id="private_chat" class="tab-pane fade in " style="">
+				<div style="">
+					<h3 id="hearder_chat_yes" style="margin-left: 20px;">People booked this chats with you </h3>
+					<h3 id="hearder_chat_no" class="nowtext" style="margin-left: 20px;">there are no chats booked yet &nbsp;<i class="fa fa-frown-o fa-1x" aria-hidden="true"></i></h3>
 
+				  	<span ><a title="change private chat settings" href="doc_chat_settings.php?u_id=<?php echo $user_id; ?>"><i style="float: left;margin-left: 15px;" class="fas fa-cog fa-2x"></i><span style="margin-left: 10px;" class="h3">change private chat setting</span></a></span>
+				</div>
+				<div class="container">
+				  <div class="col-sm-12 row" style="margin-bottom: 20px;">
+
+				  	<!-- get private chats -->
+				  	<?php 
+						$private = $con->prepare("SELECT * from coming_private_chat where doc_id='$user_id' ORDER by 1 Desc ");
+						$private ->execute();
+						$chats = $private ->fetchAll();	
+						$count = $private->rowCount();
+						if($count > 0 ){
+						foreach ($chats as $key => $row_chat){
+							$chat_id = $row_chat['id'];
+							$doc_id = $row_chat['doc_id'];
+							$final_day = $row_chat['final_day'];
+							$final_month = $row_chat['final_month'];
+							$final_year = $row_chat['final_year'];
+							$day_char = $row_chat['day_char'];
+							$start_chat = $row_chat['start_chat'];
+							$start_minutes = $row_chat['start_minutes'];
+							$am_pm = $row_chat['am_pm'];
+							$was_booked_on = $row_chat['was_booked_on'];
+							$duration = $row_chat['duration'];
+							$cost = $row_chat['cost'];
+							if (!$start_minutes) {
+								$zero = 0;
+							}
+
+				  	?>
+				  	<?php 
+							$stmt = $con->prepare("SELECT * FROM users WHERE user_id = $doc_id");
+							$stmt->execute(array());
+							$row = $stmt->fetch();
+							if($count > 0 ){
+								$name = $row['user_name'];
+								$doc_f_name = $row['f_name'];
+								$doc_l_name = $row['l_name'];}
+				  	?>
+				   	<div class="col-sm-3" style="background-color:#DDD !important;margin-right: 10px;width: 260px;margin-top: 20px;border-radius: 5px;border: solid 1px;border-color: red;">
+						<h4 style="text-align:center;margin-top: 7px;font-weight: bold;">Chat Details</h4>
+				   		<p>DR:&nbsp;<strong><a href="doc_profile.php?u_id=<?php echo $doc_id; ?>"><?php echo $doc_f_name.' '.$doc_l_name; ?></a></strong></p>
+				   		<p>Date:&nbsp;<strong><a style="text-decoration: none;"><?php echo $final_day.'/'.$final_month.'/'.$final_year; ?></a></strong></p>
+				   		<p>Day:&nbsp;<strong><a style="text-decoration: none;"><?php echo $day_char; ?></a>&nbsp; at &nbsp;<a style="text-decoration: none;"><?php  if(!$start_minutes){echo $start_chat.':'.$start_minutes.$zero.' '.$am_pm;}else{echo $start_chat.':'.$start_minutes.' '.$am_pm;}  ?></a></strong></p>
+				   		<p>Duration:<strong><a style="text-decoration: none;"><?php echo $duration.' '.'Minutes'; ?></a></strong></p>
+				   		<p>Cost:<strong><a style="text-decoration: none;"><?php echo ' '.$cost.' '.'$'; ?></a></strong></p>
+				   		<p>Booked on:&nbsp;<strong><a style="text-decoration: none;"><?php echo $was_booked_on; ?></a></strong></p>
+				   		<center><a href="private_chat.php?chat_id=<?php echo $chat_id; ?>"><button class="btn btn-info" style="margin-bottom: 5px;">go to chat</button></a></center>
+				    </div>
+
+
+<?php }
+} else{
+?>
+<script>
+	document.getElementById("hearder_chat_yes").classList.add("nowtext");
+	document.getElementById("hearder_chat_no").classList.remove("nowtext");
+</script>
+<?php } ?>
+				  </div>
+				</div>
+			</div>
+<?php } else{ ?>
+	<div style="margin-bottom: 50px;" id="private_chat" class="tab-pane fade in ">
+		<center>
+		<center style="display: inline-flex;">
+		<h3>You should change your private chat setting </h3>
+		<a href="doc_chat.php?u_id=<?php echo $user_id; ?>"><i style="margin-left: 20px;margin-top: 15px;" class="fas fa-cog fa-3x"></i></a>
+		</center>
+	</center>
+<?php } ?>
+	</div>
     <div id="menu3" class="tab-pane fade">
     		<!-- Start Doctor Information -->
 	<div class="information">

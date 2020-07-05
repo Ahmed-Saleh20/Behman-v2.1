@@ -12,9 +12,11 @@ if(!isset($_SESSION['user_email'])){
 	if(isset($_GET['u_id'])){
 
 		$user_id = $_GET['u_id'];
-		$select  = $con->prepare("SELECT * from users where user_id='$user_id'");
+		$select  = $con->prepare("SELECT * from users where user_id='$user_id' and type=2 ");
 		$select  ->execute();
 		$row = $select  ->fetch();	
+		$count = $select->rowCount();
+
 
 		$id = $row['user_id'];
 		$user_image = $row['user_image'];
@@ -29,7 +31,20 @@ if(!isset($_SESSION['user_email'])){
 		$user_birthday = $row['user_birthday'];
 
 		$share_post = "postDetails.php?post_id=";
+
+		/* Check IF User Is Owner User */
+		$user = $_SESSION['user_email'];
+		$get_user  = $con->prepare("SELECT * from users where user_email='$user'");
+		$get_user  ->execute();
+		$row = $get_user  ->fetch();	
+		$userown_id = $row['user_id'];
+		$user_name = $row['user_name'];
+		$type = $row['type'];
 	?>	
+	<link rel="stylesheet" href="mystylesheet.css">
+ 	<input type="hidden" id="this_user_id1" value="<?php echo $user_id; ?>">
+	<input type="hidden" id="this_user_id2" value="<?php echo $userown_id; ?>">
+
 <div class="container">
 <div class='row'>
 <center>
@@ -110,12 +125,23 @@ if(!isset($_SESSION['user_email'])){
 	<!-- Start Displaying Users own Posts-->
 	<div class="col-sm-8">
 	<?php
-	if($user_id == $sessionuser_id){
-		echo "<center><h1><strong>Your Posts</strong></h1></center>";
-	}else{
-		echo "<center><h1><strong>$name Posts</strong></h1></center>";
-	}	
+	// if($user_id == $sessionuser_id){
+	// 	echo "<center><h1><strong>Your Posts</strong></h1></center>";
+	// }else{
+	// 	echo "<center><h1><strong>$name Posts</strong></h1></center>";
+	// }	
 	?>	
+
+
+	<!-- nav-pills for private chats and posts -->
+	<center>
+	  <ul id="my_pills" class="nav nav-pills" style="margin-left:0px;font-size:20px;border-color:#DDD;background-color:rgb(0,0,0,0.2);margin-bottom:50px;margin-top:0;max-width: 250px;padding-left: 20px;">
+	    <li class="active"><a data-toggle="pill" href="#private">Privat Chats</a></li>
+	    <li style="margin-left:0px;"><a data-toggle="pill" href="#posts">Posts</a></li>
+	  </ul>
+	</center>
+
+
 		<?php
 			global $con;
 			if(isset($_GET['u_id'])){
@@ -140,12 +166,73 @@ if(!isset($_SESSION['user_email'])){
 				$user_name = $user['user_name'];
 				//now displaying all at once 
 		?>
-<!-- Start Post Body -->
+			<div id="private" class="tab-pane fade in active " style="">
+				<div class="container">
+				  <div class="col-sm-10 row">
+
+				  	<!-- get private chats -->
+				  	<?php 
+						$private = $con->prepare("SELECT * from coming_private_chat where user_id='$u_id' ORDER by 1 Desc ");
+						$private ->execute();
+						$chats = $private ->fetchAll();	
+						$count = $private->rowCount();
+						if($count > 0 ){
+						foreach ($chats as $key => $row_chat){
+							$chat_id = $row_chat['id'];
+							$doc_id = $row_chat['doc_id'];
+							$final_day = $row_chat['final_day'];
+							$final_month = $row_chat['final_month'];
+							$final_year = $row_chat['final_year'];
+							$day_char = $row_chat['day_char'];
+							$start_chat = $row_chat['start_chat'];
+							$start_minutes = $row_chat['start_minutes'];
+							$am_pm = $row_chat['am_pm'];
+							$was_booked_on = $row_chat['was_booked_on'];
+							$duration = $row_chat['duration'];
+							$cost = $row_chat['cost'];
+							if (!$start_minutes) {
+								$zero = 0;
+							}
+				  	?>
+				  	<?php 
+							$stmt = $con->prepare("SELECT * FROM users WHERE user_id = $doc_id");
+							$stmt->execute(array());
+							$row = $stmt->fetch();
+							
+							$i = $count;
+							$name = $row['user_name'];
+							$doc_f_name = $row['f_name'];
+							$doc_l_name = $row['l_name'];
+
+								if ($user_id == $userown_id) {
+				  	?>
+				   	<div id="inner_chat" class="col-sm-3" style="background-color:#DDD !important;margin-right: 10px;width: 260px;margin-top: 20px;border-radius: 5px;border: solid 1px;border-color: red;">
+						<h4 style="text-align:center;margin-top: 7px;font-weight: bold;">Chat Details</h4>
+				   		<p>DR:&nbsp;<strong><a href="doc_profile.php?u_id=<?php echo $doc_id; ?>"><?php echo $doc_f_name.' '.$doc_l_name; ?></a></strong></p>
+				   		<p>Date:&nbsp;<strong><a style="text-decoration: none;"><?php echo $final_day.'/'.$final_month.'/'.$final_year; ?></a></strong></p>
+				   		<p>Day:&nbsp;<strong><a style="text-decoration: none;"><?php echo $day_char; ?></a>&nbsp; at &nbsp;<a style="text-decoration: none;"><?php  if(!$start_minutes){echo $start_chat.':'.$start_minutes.$zero.' '.$am_pm;}else{echo $start_chat.':'.$start_minutes.' '.$am_pm;}  ?></a></strong></p>
+				   		<p>Duration:<strong><a style="text-decoration: none;"><?php echo $duration.' '.'Minutes'; ?></a></strong></p>
+				   		<p>Cost:<strong><a style="text-decoration: none;"><?php echo ' '.$cost.' '.'$'; ?></a></strong></p>
+				   		<p>Booked on:&nbsp;<strong><a style="text-decoration: none;"><?php echo $was_booked_on; ?></a></strong></p>
+				   		<center><a href="private_chat.php?chat_id=<?php echo $chat_id; ?>"><button class="btn btn-info" style="margin-bottom: 5px;">go to chat</button></a></center>
+				    </div>
+<?php  }  ?>
+<?php }
+} ?>
+				  </div>
+				</div>
+			</div>
+
+			<?php if ($user_id != $userown_id) { ?>
+				<center><h3>You Can't see this user chat or posts</h3></center>
+			<?php } ?>
+		<!-- Start Post Body -->
+		<div id="posts" class="tab-pane fade">
 		<div class='row'>
 			<div class='col-sm-1'> </div>
 			<div class='col-sm-11 post'>
 				<!-- Start Post's User Info  -->
-				<div class='row'>
+				<div id="inner_chat" class='row'>
 					<div class='col-sm-10 user'>
 						<img src='includes/images/users/<?php if(!empty($user_image)){ echo $user_image; }else{ echo 'default.png'; } ?>'>
 						<?php				
@@ -209,7 +296,8 @@ if(!isset($_SESSION['user_email'])){
 				<!-- End Post Button Action -->
 			</div>
 			<!-- <div class='col-sm-1'> </div> -->
-		</div><br>
+		</div>
+	</div><br>
 		<!-- End Post Body -->				
 		<?php } ?>			
 	</div>
@@ -218,6 +306,12 @@ if(!isset($_SESSION['user_email'])){
 
 	<?php } ?>
 <?php } ?>
+
+<script>
+	if (document.getElementById("this_user_id1").value != document.getElementById("this_user_id2").value) {
+		document.getElementById("my_pills").classList.add("nowtext"); 
+	}
+</script>
 <?php
 	include 'includes/templates/footer.php';				
 ?>
