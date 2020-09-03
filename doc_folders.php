@@ -13,7 +13,7 @@
     
 	    $user_id = isset($_GET['u_id']) && is_numeric($_GET['u_id']) ? intval($_GET['u_id']) : 0 ;
 
-		$stmt = $con->prepare("SELECT * FROM users WHERE user_id = ? AND type = '1'");
+		$stmt = $con->prepare("SELECT * FROM users WHERE user_id = ? AND GroupID = '2'");
 		$stmt->execute(array($user_id));
 		$row = $stmt->fetch();
 		$count = $stmt->rowCount();
@@ -37,28 +37,27 @@
 ?>
 <link href="includes/doc_attachments/local_css.css" rel="stylesheet">
 
-<div style="height: 280px; width: 140px; background-color: #CCC;margin-left: -2px;margin-top:130px;border-top-right-radius:8px;border-bottom-right-radius:8px; position: fixed;">
+	<div style="height: 280px; width: 140px; background-color: #CCC;margin-left: -2px;margin-top:130px;border-top-right-radius:8px;border-bottom-right-radius:8px; position: fixed;">
 
-		<div style="margin-top: -180px;" class="profile">
-			<a href='doc_profile.php?u_id=<?php echo $user_id;?>' title="view profile" style="text-decoration: none;"><img 
-				src='includes/images/users/<?php if(!empty($user_image)){ echo $user_image; }else{ echo 'default.png'; } ?>' 
-				            	class='img-circle'
-				            	alt='Profile' 	 
-				            	width='50px' 
-				            	height='50px' 
-			 /><?php echo "<h5 style='margin-left:-13px;font-weight:bold;color:black;'>$f_name</h5>"; ?></a>
-	</div>
-
-	<form action='playlists.php?u_id=<?php echo $user_id ?>' method='POST' enctype='multipart/form-data'>
-		<center style="margin-top: 100px;">
-		    <button style=" font-weight:bold;width: 120px;border-bottom-right-radius: 20px;border-top-right-radius: 20px;" class='btn btn-info'>Playlists</button>
-		</center>
-	</form>
-	<form action='doc_folders.php?u_id=<?php echo $user_id ?>' method='POST' enctype='multipart/form-data'>
-		<center style="margin-top: 10px;">
-		    <button style="font-weight:bold;width: 120px;border-bottom-right-radius: 20px;border-top-right-radius: 20px;" class='btn btn-info'>Files</button>
-		</center>
-	</form>
+		<div style="margin-top: -150px;" class="profile">
+				<a href='doc_profile.php?u_id=<?php echo $user_id;?>' title="view profile" style="text-decoration: none;"><img 
+					src='includes/images/users/<?php if(!empty($user_image)){ echo $user_image; }else{ echo 'default.png'; } ?>' 
+					            	class='img-circle img-shadow'
+					            	alt='Profile' 	 
+					            	width='60px' 
+					            	height='60px' 
+				 /><?php echo "<h5 style='text-align:center;font-weight:bold;color:black;'>$f_name</h5>"; ?></a>
+		</div>
+		<form action='doc_folders.php?u_id=<?php echo $user_id ?>' method='POST' enctype='multipart/form-data'>
+			<center style="margin-top: 145px;">
+			    <button style=" font-weight:bold;width: 120px;border-bottom-right-radius: 20px;border-top-right-radius: 20px;" class='btn btn-info'>Files</button>
+			</center>
+		</form>
+		<form action='playlists.php?u_id=<?php echo $user_id ?>' method='POST' enctype='multipart/form-data'>
+			<center style="margin-top: 10px;">
+			    <button style="font-weight:bold;width: 120px;border-bottom-right-radius: 20px;border-top-right-radius: 20px;" class='btn btn-info'>Playlists</button>
+			</center>
+		</form>
 	</div>
 
 

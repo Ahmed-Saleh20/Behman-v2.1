@@ -1,0 +1,19 @@
+.daystyle{
+    border-radius: 2px;
+    background: #f8f9fa;
+    border-left: 2px solid #e9ecef;
+    color: #495057;
+    margin-bottom: 2px;
+    padding: 10px;
+    list-style-type: none; 
+}
+.chatlimit {
+    pointer-events:none;
+    opacity: 0.4;
+}
+.nowtext{
+	display: none;
+}
+.img-shadow{
+   box-shadow: 0 0 8px 1px #24a0ed;
+}

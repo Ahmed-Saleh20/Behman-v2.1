@@ -33,7 +33,7 @@
 	$update_views = $con->prepare("UPDATE video SET views='$new_views' WHERE video_id='$video_id'");
 	$update_views->execute();
 
-	$stmt = $con->prepare("SELECT * FROM users WHERE user_id = '$current_user_id ' AND type = '1'");
+	$stmt = $con->prepare("SELECT * FROM users WHERE user_id = '$current_user_id ' AND GroupID = '2'");
 	$stmt->execute(array($current_user_id ));
 	$row = $stmt->fetch();
 	$count = $stmt->rowCount();

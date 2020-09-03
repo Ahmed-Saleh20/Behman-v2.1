@@ -14,7 +14,7 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="well">
-					<center><h1><strong>Behman</strong></h1></center>
+					<center><h1><strong>Welcome To Behman</strong></h1></center>
 				</div>
 			</div>
 		</div>
@@ -49,12 +49,12 @@
 		$email = htmlentities($_POST['email']);
 		$pass = htmlentities($_POST['pass']);
 		$hashedPass = sha1($pass);
-		$select_user = $con->prepare("SELECT * FROM users WHERE user_email= ? AND user_pass= ? AND status='verified' LIMIT 1");
+		$select_user = $con->prepare("SELECT * FROM users WHERE user_email= ? AND user_pass= ? LIMIT 1");
 		$select_user ->execute(array($email, $pass));
 		$row = $select_user ->fetch();	
 		$count = $select_user->rowCount();
-        $approved = $row['approved'];
-         $type = $row['type'];
+        $approved = $row['Approved'];
+         $type = $row['GroupID'];
 		if ($count > 0 && $approved == 1) {
 			$_SESSION['user_email'] = $email; 
 			$_SESSION['login_ID'] = $row['user_id'];
@@ -68,7 +68,7 @@
 			exit(); 
 		}
         else{
-            echo "<script>alert('Wrong Email / Password, try again!')</script>";
+            echo "<script>alert('Email Or Password Is Wrong, try again!')</script>";
 			echo "<script>window.open('signin.php','_self')</script>";
         }
 	}

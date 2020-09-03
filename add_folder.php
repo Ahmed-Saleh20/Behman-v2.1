@@ -13,7 +13,7 @@
     
 	    $user_id = isset($_GET['u_id']) && is_numeric($_GET['u_id']) ? intval($_GET['u_id']) : 0 ;
 
-		$stmt = $con->prepare("SELECT * FROM users WHERE user_id = ? AND type = '1'");
+		$stmt = $con->prepare("SELECT * FROM users WHERE user_id = ? AND GroupID = '2'");
 		$stmt->execute(array($user_id));
 		$row = $stmt->fetch();
 		$count = $stmt->rowCount();

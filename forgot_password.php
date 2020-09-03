@@ -14,7 +14,7 @@
 	<div class="row">
 		<div class="col-sm-12">
 			<div class="well">
-				<center><h1 style="color: white;"><strong>Behman</strong></h1></center>
+				<center><h1 style="color: white;"><strong>Welcome To Behman</strong></h1></center>
 			</div>
 		</div>
 	</div>
@@ -27,15 +27,15 @@
 		        <div class="l-part">
 		          <form  action="" method="post">
 		          	<div class="input-group">
-								    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-								    <input id="email" type="text" class="form-control" name="email" placeholder="Enter Your Email" required="required">
-								</div><br>
-								<hr>
-								<pre class="text">Enter your BestFriend name down below</pre>
+						<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+						<input id="email" type="text" class="form-control" name="email" placeholder="Enter Your Email" required="required">
+					</div><br>
+					<hr>
+					<pre class="text">Enter your BestFriend name down below</pre>
 		          	 <div class="input-group">
-								    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-								    <input id="msg" type="text" class="form-control" placeholder="Someone" name="recovery_account" required="required">
-								</div><br>
+						<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+						<input id="msg" type="text" class="form-control" placeholder="Someone" name="recovery_account" required="required">
+						</div><br>
 					<a style="text-decoration:none;float: right; color:#187FAB;" data-toggle="tooltip" title="Signin"  href="signin.php">Back to Signin?</a><br><br>
 		            <center><button id="signup" class="btn btn-info btn-lg" name="submit">Submit</button></center>
 		          </form>

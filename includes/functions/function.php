@@ -118,63 +118,7 @@ function userLiked($post_id)
 
 function search_user(){
 
-	global $con;
-	if(isset($_GET['search_user_btn'])){
-	$search_query = htmlentities($_GET['search_user']);
 
-	$get_user = 
-	$con->prepare("SELECT * from users where f_name like '%$search_query%' OR l_name like '%$search_query%' OR user_name like '%$search_query%'");
-
-	}else{
-	$get_user = $con->prepare("SELECT * from users ");
-	}
-
-	$get_user ->execute();
-	$rows = $get_user ->fetchAll();	
-
-	foreach ($rows as $key => $row_user){
-		$user_id = $row_user['user_id'];
-		$f_name = $row_user['f_name'];
-		$l_name = $row_user['l_name'];
-		$username = $row_user['user_name'];
-		$user_image = $row_user['user_image'];
-		$user_type = $row_user['type'];
-		//now displaying all at once
-		echo "
-		<div class='row'>
-			<div class='col-sm-3'> </div>
-			<div class='col-sm-6'>
-			<div class='row' id='find_people'>
-			<div class='col-sm-4'>
-			<a style='text-decoration: none;cursor: pointer;color: #3897f0;' href='user_profile.php?u_id=$user_id'>
-			<img class='img-circle' src='includes/images/users/$user_image' width='150px' height='140px' title='$username' style='float:left; margin:1px;'/>
-			</a>
-			</div><br><br>
-			<div class='col-sm-6'>
-			";
-		?>
-		<?php				
-			if($user_type == 1 ){
-	    	echo "<a style='text-decoration: none;cursor: pointer;color: #3897f0;' href='doc_profile.php?u_id=$user_id'>
-			<strong><h2>$f_name $l_name</h2></strong>
-			</a>";
-	    	}else{
-	    	echo "<a style='text-decoration: none;cursor: pointer;color: #3897f0;' href='user_profile.php?u_id=$user_id'>
-			<strong><h2>$f_name $l_name</h2></strong>
-			</a>";
-	    	}
-		?>	
-		<?php
-		echo "
-			</div>
-			<div class='col-sm-3'> </div>
-			</div>
-			</div>
-			<div class='col-sm-4'> </div>
-		</div><br>
-		";
-
-	}
 
 }
 function insert_user(){

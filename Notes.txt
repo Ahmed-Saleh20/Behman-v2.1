@@ -1,0 +1,15 @@
+
+Change type to GroupID in Database.
+GroupID of Users: 
+      Admin :  1
+      Doctor : 2
+      Member : 3
+Change approved to Approved in Database.
+Change user_block to Blocked in Database.
+Colors Is Used -> #24a0ed / #31b0d5.
+Deleted status from users table.
+
+Private Chat
+Folder: dist, plugins.
+Files: doc_chat.php -> doc_chat_setting.php , user_private_chat.php -> user_private_chat2.php.
+private_chat.php ??????

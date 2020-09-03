@@ -6,19 +6,24 @@
 	}else{ 
 		include("initialize.php");
 ?>
+<?php include("includes/templates/slidbar.php"); ?>
+
 <div class="container">
 	<div class="row">
-		<div class="col-sm-12">
+		<div class="col-sm-2"></div>
+		<div class="col-sm-8">
 			<center><h2>See Your reslts here!</h2></center><br><br>
 	<?php 
 			if(isset($_GET['search'])){
-			$search_query = htmlentities($_GET['user_query']);
+				$search_query = htmlentities($_GET['user_query']);
 			}
-
 			$get_posts = $con->prepare("SELECT * from posts where post_content like '%$search_query%'");
 			$get_posts ->execute();
 			$posts = $get_posts ->fetchAll();
-
+			$count = $get_posts ->rowCount();
+			if($count == 0 ){
+				echo "<center><h2>There's No Posts To Show,Try Again!</h2></center><br><br>";
+			}else{	
 			foreach ($posts as $key => $row_posts) {
 
 				$post_id = $row_posts['post_id'];
@@ -34,41 +39,78 @@
 				$first_name = $row_user['f_name'];
 				$last_name = $row_user['l_name'];
 				$user_image = $row_user['user_image'];
-				$user_type = $row_user['type'];
+				$user_type = $row_user['GroupID'];
 	?>
-				<!-- Start Display Posts -->
+		<!-- Start Post Body -->
+			<div class="post">
+				<!-- Start Post's User Info  -->
 				<div class='row'>
-					<div class='col-sm-2'> </div>
-					<div id='posts' class='col-sm-8'>
-						<div class='row'>
-							<div class='col-sm-2'>
-								<p><img src='includes/images/users/<?php echo $user_image ?>' class='img-circle' width='100px' height='100px'></p>
-							</div>
-							<div class='col-sm-6'>
-							<?php				
-								if($user_type == 1 ){
-						    	echo "<h3><a style='text-decoration: none;cursor: pointer;color: #3897f0;' href='doc_profile.php?u_id=$user_id'>$user_name</a></h3>";
-						    	}else{
-						    	echo "<h3><a style='text-decoration: none;cursor: pointer;color: #3897f0;' href='user_profile.php?u_id=$user_id'>$user_name</a></h3>";
-						    	}
-							?>	
-						  	<h4><small style='color:black;'>Updated a post on <strong><?php echo $post_date ?></strong></small></h4>
-							</div>
-							<div class='col-sm-4'> </div>
-						</div>
-						<div class='row'>
-							<div class='col-sm-2'> </div>
-							<div class='col-sm-6'>
-								<h3><p><?php echo $content ?></p></h3>
-							</div>
-							<div class='col-sm-4'> </div>
-						</div>
-						<a href='postDetails.php?post_id=<?php echo $post_id ?>' style='float:right;'><button class='btn btn-info'>Comment</button></a><br>
+					<div class='col-sm-10 user'>
+						<img src='includes/images/users/<?php if(!empty($user_image)){ echo $user_image; }else{ echo 'default.png'; } ?>'>
+						<?php				
+							if($user_type == 2 ){
+				    			echo "<a class='name' href='doc_profile.php?u_id=$user_id'>$user_name</a>";
+				    		}else{
+				    			echo "<a class='name' href='user_profile.php?u_id=$user_id'>$user_name</a>";
+				    		}
+						?>	
+						<p class="date">Updated a post on <strong><?php echo $post_date ?></strong></p>
 					</div>
-					<div class='col-sm-3'> </div>
-				</div><br>	
-				<!-- End Display Posts -->
-<?php } ?>
+					<div class='col-sm-2 owner-action'>
+					<?php if($user_id == $sessionuser_id){?>
+						<a href="post.php?do=edit&post_id=<?php echo $post_id ?>" class=" edit" title="Edit" ><i class="fa fa-pencil" aria-hidden="true"></i></a>
+						<a href="post.php?do=delete&post_id=<?php echo $post_id ?>" class="delete" title="Delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
+					<?php } ?>	
+					</div>
+				</div>
+				<!-- End Post's User Info  -->
+				<!-- Start Post Content -->
+				<div class='row'>
+					<div class='col-sm-1'> </div>
+					<div class='col-sm-10 content' >
+						<p><?php echo $content ?></p>
+					</div>
+					<div class='col-sm-1'></div>
+				</div>
+				<!-- End Post Content -->
+				<!-- Start Post Button Action -->
+				<div class="post-button">
+					<!-- Start Like Button -->
+			      	<i 
+			      	  <?php if (userLiked($post_id) ){?>
+			      		  class="fa fa-thumbs-up fa-7x like-btn"
+			      	  <?php }else{ ?>
+			      		  class="fa fa-thumbs-o-up fa-7x like-btn"
+			      	  <?php } ?>
+			      	  data-id="<?php echo $post_id; ?>">
+			      	</i>
+			      	<span class="likes numLikes"><?php echo getLikes($post_id); ?></span>
+				    <script src="layout/js/scripts.js"></script>
+				    <!-- End Like Button -->
+				    <!-- End Like Button -->
+					<a href='post.php?do=postDetails&post_id=<?php echo $post_id ?>' class='show-btn btn btn-info'>Comment</a>	
+					<div class="share-area">
+					  <div id="popover-div" class="col-sm-12 col-xs-12 col-md-9">
+					    <buttom id="share" class="btn btn-info change-trigger" data-original-title="Share a link to this post">Share</buttom>        
+					    <div class="hide" id="html-div">
+					      <form class="share-form">
+					        <div class="form-group">
+					          <input class="form-control share-link" id="post_link" type="text" readonly=""  value="<?php echo $share_post.$post_id ?>"/>
+					        </div>
+					        <div class="form-group">
+					          <a onclick="myFunction()" id="copy" class="share-copy-button btn btn-info">Copy link</a>
+	 				        </div>
+					      </form>
+					    </div>
+					  </div>
+					</div>
+				</div>
+				<!-- End Post Button Action -->
+			</div><br>
+		<!-- End Post Body -->
+	<!-- End Display Posts -->
+	<?php }} ?>
+	</div>
 	</div>
 </div>
 </div>

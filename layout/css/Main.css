@@ -1,63 +1,28 @@
-@media(max-width:576px){}
-@media(min-width:768px){}
+@media(max-width:576px){} max == less than
+@media(min-width:768px){} min == more than
 @media(min-width:992px){}
 @media(min-width:1200px){}
 
   /* S General */
-  
+
   body{
     overflow-x: hidden;
+    background-color: #fff;
   }
   .panel-info {
     border-color: #31b0d5;
   }
   .panel-info > .panel-heading {
     color:black;
-    background-color: #31b0d5;
+    background-color: #5bc0de;
     border-color: #31b0d5;
   }
   /* E General */
 
-  /* Start NavBar Design */
-  form.search_form input[type=text] {
-    padding: 10px;
-    font-size: 17px;
-    border-radius:4px;
-    border: 1px solid grey;
-    float: left;
-    width: 80%;
-    background: #f1f1f1;
-  }
-
-  form.search_form button {
-    float: left;
-    width: 20%;
-    padding: 10px;
-    font-size: 17px;
-    border: 1px solid grey;
-    border-left: none;
-    cursor: pointer;
-  }
-
-  form.search_form button:hover {
-    background: #0b7dda;
-  }
-
-  form.search_form::after {
-    content: "";
-    clear: both;
-    display: table;
-  }
-  /* End NavBar Design */
-  
-
- 
 
 
   /* Start SignIn Design */
-	body{
-		overflow-x: hidden;
-	}
+
 	.main-content {
 	  width: 50%;
 	  height: 40%;
@@ -69,9 +34,6 @@
 	.header {
 	  border: 0px solid #000;
 	  margin-bottom: 5px;
-	}
-	.well{
-		background-color: #187FAB;
 	}
 	#signin{
 		width: 60%;
@@ -89,7 +51,7 @@
 	  text-decoration: none;
 	  font-family: 'Overpass Mono', monospace;
 	  letter-spacing: -1px;
-	}	
+	}
 	/* End SignIn Design */
 	/* Start Forget Password */
   body{
@@ -107,9 +69,6 @@
     border: 0px solid #000;
     margin-bottom: 5px;
   }
-  .well{
-    background-color: #187FAB;
-  }
   #signup{
     width: 60%;
     border-radius: 30px;
@@ -118,8 +77,8 @@
     width: 60%;
     border-radius: 30px;
   }
-	
-	/* End Forgrt Password */  
+
+	/* End Forgrt Password */
 
 
 	/* Start Profile Design */
@@ -152,7 +111,7 @@
 #posts_img {
     height:300px;
    	width:100%;
-}	
+}
 /* End Profile Design */
 
 /* start user_profile */
@@ -175,59 +134,38 @@
 }
 
 /* Start Index Design */
-	body{
-		overflow-x: hidden;
-	}
-	#centered1 {
-	    position: absolute;
-	    font-size:10vw;
-	    top: 20%;
-	    left: 10%;
-	    
-	}
-	#centered2 {
-	    position: absolute;
-	    font-size:10vw;
-	    top: 40%;
-	    left: 10%;
-	}
-	#centered3 {
-	    position: absolute;
-	    font-size:10vw;
-	    top: 60%;
-	    left: 10%;
-	}
-	#signup{
-		width: 60%;
-		border-radius: 30px;
-		margin-bottom: 15px;
-	}
-    #docsignup{
-		width: 60%;
-		border-radius: 30px;
-		margin-bottom: 15px;
+  #signup,#login{
+    width: 80%;
+    margin-left: 40px;
+    border-radius: 30px;
+    margin-bottom: 15px;
+  }
+  #docsignup{
+    width: 25%;
+    border-radius: 30px;
+    position: relative;
+    left: 59%;
 	}
 	#login{
-		width: 60%;
 		background-color: #fff;
 		border: 1px solid #1da1f2;
 		color: #1da1f2;
 		border-radius: 30px;
 	}
 	#login:hover{
-		width: 60%;
 		background-color: #fff;
 		color: #1da1f2;
 		border: 2px solid #1da1f2;
 		border-radius: 30px;
 	}
 	.well{
-		background-color: #187FAB;
+		background-color: #31b0d5;
 		color: white;
 		text-align: center;
 	}
-
-
+  .index2-img{
+    opacity: 0.7;
+  }
 	/* End Index Design */
   /*Start Pagination Area*/
 
@@ -241,22 +179,18 @@
 .pagination a:hover:not(.active) {background-color: #ddd;}
 
 /*End Pagination Area */
-  
+
 
 
 /* Start Doctor Profile */
-.cover-img{
-  height:400px;
-  width:100%;
-  border-radius: 7px;
-}
+
 .cover-ul {
   position: absolute;
   top: 10px;
   left: 40px;
 }
 .photo-ul{
-  position: absolute; 
+  position: absolute;
   bottom: 3px;
   left: 26px
 }
@@ -280,8 +214,12 @@
   background-color: #eee;
 }
 .information ul li span{
-  display: inline-block;
-  width: 120px;
+width: 115px;
+font-size: 16px;
+position: relative;
+top: 3px;
+left: 6px;
+display: contents;
 }
 .thumbnail .date {
   text-align: right;
@@ -312,18 +250,73 @@
 #posts_img {
     height:300px;
     width:100%;
-} 
+}
 /* End Doctor Profile */
 
 
 
 
+/*
+==============================
+======== Start NavBar ========
+==============================
+*/
+@media(min-width:992px){
+.navbar-links{
+    margin-left:150px;
+    }
+.navbar{
+    height: 60px;
+}
+.navbar-nav .user{
+  margin-left: 30px;
+}
+.acenter {
+position: relative;
+left: 100px
+}
+}
+@media(min-width:1200px){
+.navbar-links{
+    margin-left:150px;
+    }
+.navbar{
+    height: 60px;
+}
+}
+.navbar{
+    background-color: #fff;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    font-size: 15px;
+    font-family: Tahoma;
+}
+.navbar-default .navbar-nav > li > a{
+  color: #777;
+  font-size: 16px;
+}
+.nav > li > a {
+    position: relative;
+    display: block;
+    padding: 16px 8px;
+}
 
+/*.navbar-links{
+    margin-left:150px;
+    margin-top:5px;
+}
 
+@media(max-width:576px){
+    .navbar-links{
+        margin-left:7px;
+         margin-top:0px;
+    }
 
-
-
-
+}
+/*
+==============================
+========= End NavBar =========
+==============================
+*/
 
 
 /*
@@ -335,11 +328,16 @@
 /* Start Home Design */
     /* Start Create Post */ /* If You Want Change Ask Me First. Don't Touch Please 'Saleh' */
     .insert-post{
-      background-color: #fff;
-      border: 2px solid #e6e6e6;
+      background-color: rgba(255, 255, 255, 0.7);
+      /*border: 2px solid #e6e6e6;*/
       padding: 10px 30px 20px 30px;
+      -webkit-box-shadow: 0 3px 10px #CCC;
+      -moz-box-shadow: 0 3px 10px #CCC;
+      box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
     }
-    .insert-post textarea{}  /* Doesn't Delete It 'Saleh' */ 
+    .insert-post textarea{
+      resize: none;
+      }
     .select-type{
       padding: 10px 5px;
       margin: 0px;
@@ -358,13 +356,42 @@
     }
     /* End Create Post */
 
+    /*Start Best Doctor*/
+    .bestPanel .panel-img-top{
+      width: 100%;
+      height: 200px;
+      border-radius-top:10px;
+    }
+    .bestPanel .bestDoc-img {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      margin-right: 2px;
+      display: inline-block;
+      box-shadow: 0 0 8px 1px #24a0ed;
+    }
+    .bestPanel .best-li{
+      margin-top: 5px;
+    }
+    .information .bestPanel ul li span{
+      width: 180px;
+      font-size: 16px;
+    }
+    .panel-heading span{color: white; font-size: 16px}
+    @media (max-width: 992px) { /*max = less Than*/
+    .bestPanel{
+         visibility: hidden;
+    }
+}
+    /*End Best Doctor*/
+
     /*
     ==============================
     ============= POST ===========
     ==============================
     */
 
-/* End Home Design */ 
+/* End Home Design */
 
 /*
 ==============================
@@ -372,6 +399,151 @@
 ==============================
 */
 
+/*
+==============================
+======== Start SlideBar ======
+==============================
+*/
+
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    height: 100%;
+    background: #5bc0de;
+    color: #fff;
+    transition: all 0.3s;
+    position: fixed;
+    top: 0px;
+    z-index: 9999;
+}
+
+/*
+#sidebar.active {
+    margin-left: -250px;
+}
+*/
+.sidebar p{
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1em;
+    font-weight: 300;
+    line-height: 1.7em;
+    color: #999;
+}
+
+.sidebar a,
+.sidebar a:hover,
+.sidebar a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+#sidebar .sidebar-header {
+    padding: 13px;
+    background: #31b0d5;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#sidebar ul.components {
+    padding: 20px 0;
+    border-bottom: 1px solid #31b0d5;
+}
+
+#sidebar ul p {
+    color: #fff;
+    padding: 10px;
+    font-size: 19px;
+    text-align: center;
+    font-weight: 501;
+    margin-top: -10px;
+}
+
+#sidebar ul li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+#sidebar ul li a:hover {
+    color: #31b0d5;
+    background: #fff;
+}
+
+#sidebar ul li.active > a, a[aria-expanded="true"] {
+    color: #fff;
+    background: #31b0d5;
+}
+
+.sidebar a[data-toggle="collapse"] {
+    position: relative;
+}
+
+.sidebar a[aria-expanded="false"]::before,
+.sidebar a[aria-expanded="true"]::before {
+    content: '\e259';
+    display: block;
+    position: absolute;
+    right: 20px;
+    font-family: 'Glyphicons Halflings';
+    font-size: 0.6em;
+}
+.sidebar a[aria-expanded="true"]::before {
+    content: '\e260';
+}
+
+
+.sidebar ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: #31b0d5;
+}
+
+.sidebar ul.CTAs {
+    padding: 20px;
+}
+
+.sidebar ul.CTAs a {
+    text-align: center;
+    font-size: 0.9em !important;
+    display: block;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.sidebar a.download {
+    background: #fff;
+    color: #31b0d5;
+}
+
+.sidebar a.article,
+.sidebar a.article:hover {
+    background: #31b0d5 !important;
+    color: #fff !important;
+}
+
+/* ---------------------------------------------------
+    MEDIAQUERIES
+----------------------------------------------------- */
+@media (max-width: 992px) { /*max = less Than*/
+    #sidebar {
+        margin-left: -250px;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+    #sidebarCollapse span {
+        display: none;
+    }
+    .bestPanel{
+         visibility: hidden;
+    }
+}
+
+/*
+==============================
+========= End SlideBar =======
+==============================
+*/
 
 /*
 ==============================
@@ -388,8 +560,8 @@
       padding: 0px 50px;
     }
     .Displayed-comment h4 {
-      
-    }    
+
+    }
     .Displayed-comment .comment{
       padding: 10px;
       background-color: #eee;
@@ -423,6 +595,17 @@
   .post{
     border: 5px solid #e6e6e6;
     padding: 20px 20px;
+    background-color: rgba(255, 255, 255, 0.7);
+    -webkit-box-shadow: 0 3px 10px #CCC;
+    -moz-box-shadow: 0 3px 10px #CCC;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  }
+  .tags-label{
+    background-color: rgba(14,52,63,0.5);
+    position: relative;
+	font-size: 12px;
+	bottom: 7px;
+	left: 38px;
   }
 
     /*Start Post's USer Info*/
@@ -433,6 +616,7 @@
       border-radius: 50%;
       display: inline;
       margin-right: 15px;
+      box-shadow: 0 0 8px 1px #24a0ed;
     }
     .post .user .name{
       text-decoration: none;
@@ -447,7 +631,7 @@
       font-size: 13px;
     }
     /*End Post's USer Info*/
-  
+
     /* Start Owner Action Buttons*/
     .owner-action{
         float: right;
@@ -468,7 +652,7 @@
       color:#31b0d5;
     }
     @media(max-width:576px){
-      
+
       .owner-action{
         float: right;
       }
@@ -500,11 +684,11 @@
 
     }
     /* End Owner Action Buttons */
-    
+
     /* Start Post Content */
     .post .content{
       font-size: 20px;
-      border: 2px solid #eee;
+      border: 1px solid #eee;
       height:auto;
     }
     .content p{
@@ -523,7 +707,7 @@
         cursor: pointer;
         position: relative;
         left: 20px;
-        
+
     }
     .post-button .fa{
         font-size: 34px;
@@ -587,14 +771,14 @@ height: 40px ;
   color: blue ;
   padding: 10px 10px ;
   margin-left:  550px ;
- 
+
 
 }
 .admin_tasks table  td{
- 
+
   padding: 5px 5px ;
-  
- 
+
+
 
 }
 .admin_tasks a {
@@ -602,7 +786,7 @@ height: 40px ;
  color: black ;
 }
 .dropbtn {
- 
+
   color: black;
   padding: 16px;
   font-size: 16px;
@@ -612,7 +796,7 @@ height: 40px ;
 
 .dropdown {
 
-  
+
 }
 
 .dropdown-content {
@@ -644,7 +828,7 @@ height: 40px ;
 .users_data  {
   margin-left: 270px ;
   text-align: left;
- 
+
   height: 50px ;
 }
 .users_data table {
@@ -662,30 +846,30 @@ height: 40px ;
   padding: 10px 10px ;
  border-bottom: 1px solid #ddd;
  text-align: left;
-  
+
 }
 .users_data button {
- 
+
   border: none;
   color: white;
   padding: 10px 22px;
   text-align: center;
   text-decoration: none;
- 
+
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
-   
-  
+
+
 }
 
 .users_data_button1  {
   background-color: #4CAF50; /* Green */
 }
 .users_data_button2  {
-  
+
   background-color:#f44336 ;
- 
+
 }
 .m_content{
   max-width: 300px ;
@@ -709,4 +893,83 @@ height: 40px ;
    border-radius: 30% 30% 50% 1% ;
   width: 150px ;
   height: 150px ;
-  
+  }
+.update-btn{
+  position: absolute;
+  top: 240px;
+  left: 130px;
+}
+.user-img-user{
+  width: 180px;
+  height: 180px;
+  box-shadow: 0 0 8px 1px #24a0ed;
+}
+.search-img{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: inline;
+  margin-right: 15px;
+  box-shadow: 0 0 8px 1px #24a0ed;
+  margin-top: 20px;
+}
+.user-search{
+  margin-top: 50px;
+}
+
+/* Start Doctor Page */
+.cover-img{
+  height:400px;
+  width:100%;
+  border-radius: 10px;
+  box-shadow: 0 0 20px 10px #e6e6e6;
+}
+.docprofileimg{
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  display: inline;
+  box-shadow: 0 0 8px 1px #24a0ed;
+}
+.docnav{
+  margin-left:0px;
+  font-size:20px;
+  border-color:#DDD;
+  background-color:#eee;
+  margin-bottom:40px;
+  border-radius: 10px;
+  text-align: center;
+}
+.nav-pills > li.active > a, .nav-pills > li.active > a:focus, .nav-pills > li.active > a:hover {
+    color: #fff;
+    background-color: #31b0d5;
+}
+.docnav > li > a:focus, .docnav > li > a:hover {
+    text-decoration: none;
+    background-color: #ddd;
+}
+.docnav > li > a {
+    position: relative;
+    display: block;
+    padding: 14px 15px;
+}
+.docnav ul li.active > a, a[aria-expanded="true"] {
+    color: #31b0d5;
+    background: #31b0d5;
+        background-color: rgb(49, 176, 213);
+}
+.gl-navdoc{
+  font-size: 13px;
+}
+.btn-attachment{
+  width: 100%;
+  margin: 0px;
+  height: 40px;
+  margin-bottom: -9px;
+}
+
+/* End  Doctor Page */
+
+.img-shadow{
+   box-shadow: 0 0 8px 1px #24a0ed;
+}

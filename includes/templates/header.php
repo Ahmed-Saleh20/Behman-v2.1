@@ -14,6 +14,11 @@
         <link rel="stylesheet" href="layout/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="layout/css/Main.css"/>
         <link rel="stylesheet" href="layout/css/font-awesome4.min.css" />
+
+	    <!-- Favicons -->
+	    <link href="includes/images/favicon.png" rel="icon">
+	    <link href="includes/images/apple-touch-icon.png" rel="apple-touch-icon">
+
         
         <script src="layout/js/jQuery v3.3.1 jquery.min.js"></script>
         <script src="layout/js/Bootstrap v3.3.7 bootstrap.min.js"></script>

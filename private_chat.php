@@ -42,7 +42,7 @@
 
 	//$user_id = isset($_GET['doc_id']) && is_numeric($_GET['doc_id']) ? intval($_GET['doc_id']) : 0 ;
 			//get doctor data
-			$stmt = $con->prepare("SELECT * FROM users WHERE user_id = $this_doc_id AND type = '1'");
+			$stmt = $con->prepare("SELECT * FROM users WHERE user_id = $this_doc_id AND GroupID = '2'");
 			$stmt->execute();
 			$row = $stmt->fetch();
 			$count = $stmt->rowCount();
@@ -70,7 +70,7 @@
 				$row = $get_user  ->fetch();	
 				$userown_id = $row['user_id'];
 				$user_name = $row['user_name'];
-				$type = $row['type'];
+				$type = $row['GroupID'];
 
 				$_SESSION['doc_id'] = $id;
 				$_SESSION['user_id'] = $id_u;
@@ -137,11 +137,11 @@
 
 
 
-				<textarea id="message_textarea" name="message" cols="30" rows="2" class="textarea form-control chatlimit" placeholder="Write message" style="width: 717px;margin-right: 10px;border-radius: 5px;"></textarea>
+				<textarea id="message_textarea" name="message" cols="30" rows="2" class="textarea form-control " placeholder="Write message" style="width: 717px;margin-right: 10px;border-radius: 5px;"></textarea>
 
 				<input type="hidden" name="userown_id" value="<?php echo $userown_id; ?>">
 				<input type="hidden" name="chat_id" value="<?php echo $chat_id; ?>">
-				<button id="send_message" name="send_message" title="Send" class="form-control chatlimit" style="height: 70px;width: 70px; margin-top: 10px;background-color: #8ff78f;border: none;border-radius: 5px;"><i style="" class='fa fa-paper-plane fa-3x' aria-hidden='true'></i></button>
+				<button id="send_message" name="send_message" title="Send" class="form-control " style="height: 70px;width: 70px; margin-top: 10px;background-color: #8ff78f;border: none;border-radius: 5px;"><i style="" class='fa fa-paper-plane fa-3x' aria-hidden='true'></i></button>
 
 			</form>
 		</div>
@@ -165,108 +165,7 @@
 
     ?>
     <span  id="countdown-1" hidden="">5</span>
-  	<script>
-	
-	//today date details
-	  var da = new Date();
 
-	  var d_today =  da.getDate();
-	  var mo_today = da.getMonth()+1;
-	  var y_today =  da.getFullYear();
-	  var mi_today = da.getMinutes();
-
-	  if (da.getHours() > 12) {
-	  	var h_today = (da.getHours())-12;
-	  	var am_today = 'PM';
-	  }
-	  else{
-	  	var h_today = da.getHours();
-	  	var am_today = 'AM';
-	  }
-
-
-	//chat date details
-    var d_chat = "<?php echo $final_day; ?>";
-    var mo_chat = "<?php echo $final_month; ?>";
-    var y_chat = "<?php echo $final_year; ?>";
-    var h_chat = "<?php echo $start_chat; ?>";
-    var mi_chat = "<?php echo $start_minutes; ?>";
-    var am_chat = "<?php echo $am_pm; ?>";
-    var duration_chat = "<?php echo $duration; ?>";
-
-
-    if (y_today == y_chat) {
-    	if (mo_today == mo_chat) {
-    		if (d_today == d_chat) {
-    			if (h_today == h_chat) {
-    				if (mi_today == mi_chat) {
-    					document.getElementById("alert").classList.add("nowtext");
-    					document.getElementById("message_textarea").classList.remove("chatlimit");
-    					document.getElementById("send_message").classList.remove("chatlimit");
-    				}
-
-
-    				
-    				else if (mi_today < mi_chat){
-    			    	 if (mi_chat == 0) {
-    	document.getElementById("text2").innerHTML = d_chat+'/'+mo_chat+'/'+y_chat+' at '+h_chat+':'+mi_chat+mi_chat+' '+am_chat;}
-    					else{
-    	document.getElementById("text2").innerHTML = d_chat+'/'+mo_chat+'/'+y_chat+' at '+h_chat+':'+mi_chat+' '+am_chat;
-    	}
-    	document.getElementById("alert").classList.remove("nowtext");
-    	document.getElementById("countdown-11").classList.add("nowtext");
-    				}
-
-    			    else{
-    			    	 if (mi_chat == 0) {
-    	document.getElementById("text2").innerHTML = d_chat+'/'+mo_chat+'/'+y_chat+' at '+h_chat+':'+mi_chat+mi_chat+' '+am_chat;}
-    					else{
-    	document.getElementById("text2").innerHTML = d_chat+'/'+mo_chat+'/'+y_chat+' at '+h_chat+':'+mi_chat+' '+am_chat;
-    	}
-    	document.getElementById("alert").classList.remove("nowtext");
-    	document.getElementById("countdown-11").classList.add("nowtext");
-    }
-    			}
-    			    else{
-    			    	 if (mi_chat == 0) {
-    	document.getElementById("text2").innerHTML = d_chat+'/'+mo_chat+'/'+y_chat+' at '+h_chat+':'+mi_chat+mi_chat+' '+am_chat;}
-    					else{
-    	document.getElementById("text2").innerHTML = d_chat+'/'+mo_chat+'/'+y_chat+' at '+h_chat+':'+mi_chat+' '+am_chat;
-    	}
-    	document.getElementById("alert").classList.remove("nowtext");
-    	document.getElementById("countdown-11").classList.add("nowtext");
-    }
-    		}
-    			    else{
-    			    	 if (mi_chat == 0) {
-    	document.getElementById("text2").innerHTML = d_chat+'/'+mo_chat+'/'+y_chat+' at '+h_chat+':'+mi_chat+mi_chat+' '+am_chat;}
-    					else{
-    	document.getElementById("text2").innerHTML = d_chat+'/'+mo_chat+'/'+y_chat+' at '+h_chat+':'+mi_chat+' '+am_chat;
-    	}
-    	document.getElementById("alert").classList.remove("nowtext");
-    	document.getElementById("countdown-11").classList.add("nowtext");
-    }
-    	}
-    			    else{
-    			    	 if (mi_chat == 0) {
-    	document.getElementById("text2").innerHTML = d_chat+'/'+mo_chat+'/'+y_chat+' at '+h_chat+':'+mi_chat+mi_chat+' '+am_chat;}
-    					else{
-    	document.getElementById("text2").innerHTML = d_chat+'/'+mo_chat+'/'+y_chat+' at '+h_chat+':'+mi_chat+' '+am_chat;
-    	}
-    	document.getElementById("alert").classList.remove("nowtext");
-    	document.getElementById("countdown-11").classList.add("nowtext");
-    }
-    }
-    			    else{
-    			    	 if (mi_chat == 0) {
-    	document.getElementById("text2").innerHTML = d_chat+'/'+mo_chat+'/'+y_chat+' at '+h_chat+':'+mi_chat+mi_chat+' '+am_chat;}
-    					else{
-    	document.getElementById("text2").innerHTML = d_chat+'/'+mo_chat+'/'+y_chat+' at '+h_chat+':'+mi_chat+' '+am_chat;
-    	}
-    	document.getElementById("alert").classList.remove("nowtext");
-    	document.getElementById("countdown-11").classList.add("nowtext");
-    }
-	</script>
 <script type="text/javascript">
 	function timerfun(){
     // Initialize clock countdowns by using the total seconds in the elements tag

@@ -8,6 +8,28 @@
 		header("location: index.php");
 	}else{ 
 ?>
+<?php
+	$user_id = isset($_GET['u_id']) && is_numeric($_GET['u_id']) ? intval($_GET['u_id']) : 0 ;
+
+	$stmt = $con->prepare("SELECT * FROM users WHERE user_id = ?");
+	$stmt->execute(array($user_id));
+	$row = $stmt->fetch();
+
+		$id   			= $row['user_id'];
+		$name   		= $row['user_name'];
+		$f_name			= $row['f_name'];
+		$l_name 		= $row['l_name'];
+		$describe_user  = $row['describe_user'];
+		$gender 		= $row['user_gender'];
+		$register_date  = $row['user_reg_date'];
+		$user_country 	= $row['user_country'];
+		$user_birthday 	= $row['user_birthday'];
+		$user_image 	= $row['user_image'];
+		$user_cover 	= $row['user_cover'];
+		$user_pass 		= $row['user_pass'];
+		$user_email 	= $row['user_email'];
+		$user_type 		= $row['GroupID'];
+?>
 <div class="row">
 	<div class="col-sm-2"> </div>
 	<div class="col-sm-8">
@@ -19,46 +41,29 @@
 				<tr>
 					<td style="font-weight: bold;">Change Your Firstname</td>
 					<td>
-					<input class="form-control" type="text" name="f_name" required="required" value="<?php echo $first_name;?>"/>
+					<input class="form-control" type="text" name="f_name" required="required" value="<?php echo $f_name?>"/>
 					</td>
 				</tr>
 				<tr>
 					<td style="font-weight: bold;">Change Your Lastname</td>
 					<td>
-					<input class="form-control" type="text" name="l_name" required="required" value="<?php echo $last_name;?>"/>
+					<input class="form-control" type="text" name="l_name" required="required" value="<?php echo $l_name?>"/>
 					</td>
 				</tr>
 				<tr>
 					<td style="font-weight: bold;">Change Your Username</td>
 					<td>
-					<input class="form-control" type="text" name="u_name" required="required" value="<?php echo $user_name;?>"/>
+					<input class="form-control" type="text" name="u_name" required="required" value="<?php echo $name?>"/>
 					</td>
 				</tr>
 
 				<tr>
 					<td style="font-weight: bold;">Description</td>
 					<td>
-					<input class="form-control" type="text" name="describe_user" required="required" value="<?php echo $describe_user;?>"/>
+					<input class="form-control" type="text" name="describe_user" required="required" value="<?php echo $describe_user?>"/>
 					</td>
 				</tr>
 
-				<tr>
-					<td style="font-weight: bold;">Relationship Status</td>
-					<td>
-					<select class="form-control" name="Relationship">
-						<option><?php echo $Relationship_status;?></option>
-						<option>Engaged</option>
-						<option>Married</option>
-						<option>Single</option>
-						<option>In an Replationship</option>
-						<option>It's complicated</option>
-						<option>Separated</option>
-						<option>Divorced</option>
-						<option>Widowed</option>
-					</select>
-					</td>
-				</tr>
-				
 				<tr>
 					<td style="font-weight: bold;">Password</td>
 					<td>
@@ -90,7 +95,7 @@
 					<td style="font-weight: bold;">Gender</td>
 					<td>
 					<select class="form-control" name="u_gender">
-						<option><?php echo $user_gender;?></option>
+						<option><?php echo $gender?></option>
 						<option>Male</option>
 						<option>Female</option>
 						<option>Other</option>
@@ -184,7 +189,6 @@
 		$l_name = htmlentities($_POST['l_name']);
 		$u_name = htmlentities($_POST['u_name']);
 		$describe_user = htmlentities($_POST['describe_user']);
-		$Relationship_status = htmlentities($_POST['Relationship']);
 		$u_pass = htmlentities($_POST['u_pass']);
 		$u_email = htmlentities($_POST['u_email']);
 		$u_country = htmlentities($_POST['u_country']);
@@ -194,7 +198,7 @@
 		$update = $con->prepare("UPDATE users 
 								set 
 								f_name='$f_name', l_name='$l_name',user_name='$u_name',
-								describe_user='$describe_user',Relationship='$Relationship_status',
+								describe_user='$describe_user',
 								user_pass='$u_pass',user_email='$u_email',user_country='$u_country',
 								user_gender='$u_gender',user_birthday='$u_birthday' 
 								where 
@@ -203,11 +207,15 @@
 				 
 		if($update){
 			echo "<script>alert('Your Profile Updated!')</script>";
-			echo "<script>window.open('user_profile.php?u_id=$user_id','_self')</script>";
+			if($user_type == 2 ){
+    			echo "<script>window.open('doc_profile.php?u_id=$user_id','_self')</script>";
+    		}else{
+    			echo "<script>window.open('user_profile.php?u_id=$user_id','_self')</script>";
+    		}
+			
 		}
 	}
 ?>
-<?php } ?>
 <script>
 function show_password() {
     var x = document.getElementById("mypass");
@@ -218,6 +226,8 @@ function show_password() {
     }
 }
 </script>
+<?php } ?>
+
 <?php
 	include 'includes/templates/footer.php';
 ?>

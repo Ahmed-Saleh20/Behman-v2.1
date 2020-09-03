@@ -7,7 +7,7 @@
     */
 
     ob_start(); 
-    $dsn  = 'mysql:host=localhost;dbname=behmandb';     
+    $dsn  = 'mysql:host=localhost;dbname=behmandb_v2.1';     
     $user = 'root';                                     
     $pass = '';                                         
 

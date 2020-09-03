@@ -12,11 +12,11 @@
 	
 	if(isset($_POST['send_message'])){
 		$message = $_POST['message'];
-		$chat_id = $_POST['chat_id'];
-		$userown_id = $_POST['userown_id'];
+		$doc_id = $_POST['doc_id'];
+		$user_id = $_POST['user_id'];
 		
-	    if ($message !=null && $userown_id !=null && $chat_id !=null) {
-			$insert = $con->prepare("INSERT into private_chat(message_owner,chat_id,message)values('$userown_id','$chat_id','$message')");
+	    if ($message !=null && $doc_id !=null && $user_id !=null) {
+			$insert = $con->prepare("INSERT into private_chat(doc_id,user_id,message)values('$doc_id','$user_id','$message')");
 			$insert ->execute();
 		}
 

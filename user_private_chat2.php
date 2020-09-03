@@ -15,7 +15,7 @@
 
   $user_id = isset($_GET['u_id']) && is_numeric($_GET['u_id']) ? intval($_GET['u_id']) : 0 ;
 
-  $stmt = $con->prepare("SELECT * FROM users WHERE user_id = ? AND type = '1'");
+  $stmt = $con->prepare("SELECT * FROM users WHERE user_id = ? AND GroupID = '2'");
   $stmt->execute(array($user_id));
   $row = $stmt->fetch();
   $count = $stmt->rowCount();
@@ -29,7 +29,6 @@
     $gender = $row['user_gender'];
     $register_date = $row['user_reg_date'];
     $user_country = $row['user_country'];
-    $Relationship_status = $row['Relationship'];
     $user_birthday = $row['user_birthday'];
     $user_image = $row['user_image'];
     $user_cover = $row['user_cover'];
@@ -44,7 +43,7 @@
     $userown_id = $row['user_id'];
     $user_name = $row['user_name'];
     $user_f_name = $row['f_name'];
-    $type = $row['type'];
+    $type = $row['GroupID'];
 ?>
 
 <?php 

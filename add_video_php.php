@@ -1,4 +1,4 @@
-
+ 
 
 <?php
 	session_start();
@@ -24,7 +24,7 @@
 		$videos = $videos + 1;
 	}
 
-	$stmt = $con->prepare("SELECT * FROM users WHERE user_id = '$user_id' AND type = '1'");
+	$stmt = $con->prepare("SELECT * FROM users WHERE user_id = '$user_id' AND GroupID = '2'");
 	$stmt->execute(array($user_id));
 	$row = $stmt->fetch();
 	$count = $stmt->rowCount();

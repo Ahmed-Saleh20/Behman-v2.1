@@ -1,0 +1,189 @@
+@media(max-width:576px){} max == less than
+@media(min-width:768px){} min == more than
+@media(min-width:992px){}
+@media(min-width:1200px){}
+
+  /* Start Main Rules */ 
+      body {
+          background-color: #F4F4F4;
+          font-size: 16px;
+      }
+      h1{
+        font-size: 50px;
+        margin: 20px 0;
+        font-weight: bold;
+        color: #666;
+      }
+  /* End Main Rulez */
+  /* Start Login Form */ 
+      .login{
+          width: 300px;
+          margin: 100px auto;
+      }
+      .login h4{
+          color: #888;
+          font-size: 30px;
+      }
+      .login input {
+          margin-bottom:10px;
+      }
+      .login .form-control {
+          background-color: #EAEAEA;
+      }
+      .login .btn {
+          background-color: #008dde;
+      }
+
+  /* End Login Form */
+  /* Start Navbar */
+
+  .admin-dropdown{
+    margin-left: 500px; 
+  }
+  /* End Navbar */
+  /* Start Admin Dashboard page */
+
+    .home-stats .stat {
+      padding: 20px ;
+      font-size: 15px;
+      color: #FFF;
+      border-radius: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .home-stats .stat i {
+      position: absolute;
+      font-size: 80px;
+      top: 35px;
+      left: 30px  
+    }
+
+    .home-stats .stat .info{
+      float: right;
+    }
+
+    .home-stats .stat a {
+      color: #FFF;
+    }
+    .home-stats .stat a:hover {
+      text-decoration: none;
+    }
+    .home-stats .stat span {
+      display: block;
+      font-size: 60px;
+    }
+    .home-stats .st-members {
+      background-color: #e74c3c
+    }
+    .home-stats .st-pending {
+      background-color: #34495e
+    }
+    .home-stats .st-doctors {
+      background-color: #f39c12
+    }
+    .home-stats .st-comments {
+      background-color: #16a085
+    }
+    .latest {
+      margin-top:50px;
+    }
+    .latest .toggle-info{
+      color: #999;
+      cursor: pointer;
+    } 
+    .latest .toggle-info :hover{
+      color: #444;
+      cursor: pointer;
+    }   
+    .latest-users {
+      margin-bottom: 0 ;
+    }
+    .latest-users li{
+      padding: 10px ;
+      overflow: hidden;
+    }
+    .latest-users li:nth-child(even){
+      background-color: #EEE;
+    }
+    .latest-users .btn-success {
+      padding: 2px 8px;
+    }
+    .latest-users .btn-info {
+      padding: 2px 8px;
+      margin-right: 3px; 
+    }
+    .latest .comment-box{
+      margin: 5px 0 10px;
+    }
+    .latest .comment-box .member-n,
+    .latest .comment-box .member-c{
+      float: left;
+    }
+    .latest .comment-box .member-n{
+      width: 80px;
+      text-align: center;
+      margin-right: 20px;
+      position: relative;
+      top: 10px;
+    }
+    .latest .comment-box .member-c{
+      width: calc( 100% - 100px );
+      background-color: #EFEFEF;
+      padding: 10px;
+      position: relative;
+    }
+    .latest .comment-box .member-c:before {
+      content: " ";
+      display: block;
+      position: absolute;
+      left: -28px;
+      top: 10px;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-color: transparent  #EFEFEF transparent transparent;
+      border-width: 15px;
+    }
+  /* End Admin Dashboard page */
+
+
+  .show-pass {
+  position: absolute;
+  top: 5px;
+  right: -22px;
+  font-size: 25px !important;
+  }
+  #myInput{
+    width: 700px;
+    height: 40px;
+    position: relative;
+    left: 300px;
+  }
+  .manage-members img{
+    width: 50px;
+    height: 50px;
+  }
+  .main-table {
+    -webkit-box-shadow: 0 3px 10px #CCC;
+    -moz-box-shadow: 0 3px 10px #CCC;
+    box-shadow: 0 3px 10px #CCC;
+  }
+  .main-table td{
+    background-color: #FFF;
+    vertical-align: middle !important;
+  }
+  .main-table .Message{
+    width: 300px;
+  }
+  .main-table .table-head{
+    background-color: #333;
+    color:#FFF;
+  }
+  .main-table .btn{
+    padding: 3px 10px;
+  }
+  .activate{
+    margin-left: 5px;
+  }
+   

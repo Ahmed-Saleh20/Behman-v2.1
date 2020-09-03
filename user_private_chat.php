@@ -15,7 +15,7 @@
 
   $user_id = isset($_GET['u_id']) && is_numeric($_GET['u_id']) ? intval($_GET['u_id']) : 0 ;
 
-  $stmt = $con->prepare("SELECT * FROM users WHERE user_id = ? AND type = '1'");
+  $stmt = $con->prepare("SELECT * FROM users WHERE user_id = ? AND GroupID = '2'");
   $stmt->execute(array($user_id));
   $row = $stmt->fetch();
   $count = $stmt->rowCount();
@@ -29,7 +29,6 @@
     $gender = $row['user_gender'];
     $register_date = $row['user_reg_date'];
     $user_country = $row['user_country'];
-    $Relationship_status = $row['Relationship'];
     $user_birthday = $row['user_birthday'];
     $user_image = $row['user_image'];
     $user_cover = $row['user_cover'];
@@ -44,7 +43,7 @@
     $userown_id = $row['user_id'];
     $user_name = $row['user_name'];
     $user_f_name = $row['f_name'];
-    $type = $row['type'];
+    $type = $row['GroupID'];
 ?>
 
 <!DOCTYPE html>
@@ -76,7 +75,7 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
   <!-- my style sheet -->
-  <link rel="stylesheet" href="mystylesheet.css">
+  <link rel="stylesheet" href="dist/css/mystylesheet.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed"  style="background-color: #ebebeb;">
 <div class="wrapper">
@@ -104,7 +103,7 @@
                   <div class="direct-chat-msg" style="float: left;">
                     <!-- /.direct-chat-infos -->
                     <a href="doc_profile.php?u_id=<?php echo $user_id; ?>">
-                    <img  class="direct-chat-img" src='includes/images/users/<?php if(!empty($user_image)){ echo $user_image; }else{ echo 'default.png'; } ?>'></a>
+                    <img  class="direct-chat-img img-shadow" src='includes/images/users/<?php if(!empty($user_image)){ echo $user_image; }else{ echo 'default.png'; } ?>'></a>
                     <!-- /.direct-chat-img -->
                     <div class="direct-chat-text">
                       Hi <?php echo $user_f_name; ?>, I'm Doctor <?php echo $f_name; ?> and this my timetable next days
@@ -429,7 +428,7 @@
                  <div class="col-lg-6 col-12" style="">
                   <figure>
                     <figcaption class="test">
-                    <img style="margin-top: 5px;" src="arrow.png" alt="" width="50" height="50">
+                    <img style="margin-top: 5px;" src="dist/img/arrow.png" alt="" width="50" height="50">
                     </figcaption>
                   </figure>
                  </div>

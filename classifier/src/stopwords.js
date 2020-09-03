@@ -1,0 +1,23 @@
+stopwords = {
+	"i": 1,
+	"have": 1,
+	"has": 1,
+	"was": 1,
+	"ware": 1,
+	"about": 1,
+	"above": 1,
+	"according": 1,
+	"accordingly": 1,
+	"across": 1,
+	"actually": 1,
+	"after": 1,
+	"afterwards": 1,
+	"again": 1,
+	"against": 1,
+	"ain't": 1,
+	"all": 1,
+	"allow": 1,
+	"allows": 1,
+	"can": 1,
+	"can't": 1
+}

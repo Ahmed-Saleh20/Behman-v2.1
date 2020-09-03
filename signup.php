@@ -21,7 +21,7 @@
 	<div class="row">
 		<div class="col-sm-12">
 			<div class="well">
-				<center><h1 style="color: white;"><strong>Behman</strong></h1></center>
+				<center><h1 style="color: white;"><strong>Welcome To Behman</strong></h1></center>
 			</div>
 		</div>
 	</div>
@@ -86,23 +86,22 @@
 	if(isset($_POST['sign_up'])){
 		global $con;
 		$first_name = htmlentities($_POST['first_name']);
-		$last_name = htmlentities($_POST['last_name']);
-		$pass = htmlentities($_POST['u_pass']);
-		$email = htmlentities($_POST['u_email']);
-		$country = htmlentities($_POST['u_country']);
-		$gender = htmlentities($_POST['u_gender']);
-		$birthday = htmlentities($_POST['u_birthday']);
-		$status = "verified";
-		$posts = "no";
-		$newgid = sprintf('%05d', rand(0, 999999));
-		$username = strtolower($first_name . "_" . $last_name . "_" . $newgid);
+		$last_name  = htmlentities($_POST['last_name']);
+		$pass       = htmlentities($_POST['u_pass']);
+		$email      = htmlentities($_POST['u_email']);
+		$country    = htmlentities($_POST['u_country']);
+		$gender     = htmlentities($_POST['u_gender']);
+		$birthday   = htmlentities($_POST['u_birthday']);
+		$posts      = "no";
+		$newgid     = rand(0, 999);
+		$username   = strtolower($first_name . " " . $last_name . "- " . $newgid);
 
 		$check_username_query = $con->prepare("SELECT user_name from users where user_email='$email'");
 		$check_username_query ->execute();
 		$run_username = $check_username_query ->fetch();	
 		
-		if(strlen($pass)<8){
-			echo "<script>alert('Password should be minimum 8 characters!')</script>";
+		if(strlen($pass)<6){
+			echo "<script>alert('Password should be minimum 6 characters!')</script>";
 			exit();
 		}
 
@@ -119,9 +118,9 @@
 
 		$stmt = $con->prepare("INSERT into 
 									users 
-									(f_name,l_name,user_name,describe_user,Relationship,user_pass,user_email,user_country,user_gender,user_birthday,user_image,user_cover,user_reg_date,status,posts,recovery_account,type,approved)
+									(f_name,l_name,user_name,describe_user,user_pass,user_email,user_country,user_gender,user_birthday,user_image,user_cover,user_reg_date,posts,recovery_account,GroupID,Approved)
 									values 
-									('$first_name','$last_name','$username','Hello!! This is my default status','........','$pass','$email','$country','$gender','$birthday','default.png','default_cover.jpg',NOW(),'$status','$posts','ifyouaregootatsomethingdontdoitforfree45566677888','2','1')");
+									('$first_name','$last_name','$username','Hello!! This is my default status','$pass','$email','$country','$gender','$birthday','default.png','default_cover.jpg',NOW(),'$posts','ifyouaregootatsomethingdontdoitforfree45566677888','3','1')");
 		$stmt ->execute();
 
 		if($stmt){
